@@ -3,16 +3,11 @@ package tk.ditservices.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import tk.ditservices.DITSystem;
-
 import tk.ditservices.utils.Cooldown;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class DitCmd implements CommandExecutor {
     String noArgMsg;
@@ -58,8 +53,8 @@ public class DitCmd implements CommandExecutor {
                         return true;
                     }else{
                         if (sender instanceof ConsoleCommandSender) {
-                            ConsoleCommandSender konzoladmin = (ConsoleCommandSender) sender;
-                            konzoladmin.sendMessage(this.noArgMsg);
+                            ConsoleCommandSender consoleadmin = (ConsoleCommandSender) sender;
+                            consoleadmin.sendMessage(this.noArgMsg);
                             return true;
                         }
                     }
@@ -73,8 +68,8 @@ public class DitCmd implements CommandExecutor {
                             cd.Add(p);
                         }
                         sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Successfully reload!");
+                        sender.sendMessage(plugin.getPrefix()+ChatColor.RED+"Notice: Restart your server if the settings didn't applied.");
                     }
-                    //sender.sendMessage(plugin.getPrefix()+ChatColor.RED+" Ezt a verziót a "+ChatColor.YELLOW+"'/reload confirm'"+ChatColor.RED+" parancssal tudod csak újratölteni!");
                 }
 
                 if (command.getName().equalsIgnoreCase("st") && args[0].contains("pmanager")){
@@ -95,7 +90,6 @@ public class DitCmd implements CommandExecutor {
                             }
                             return true;
                         }
-
                         if (args[1].equalsIgnoreCase("load")) {
                             PluginCmd.handleLoad(sender,args);
                         }
@@ -134,14 +128,10 @@ public class DitCmd implements CommandExecutor {
                         cd.Add(p);
                     } return StatCmd.Run(sender);
                 }
-
             }else{
                 cd.CDText(sender);
             }
         }
-
-
-
         return true;
     }
 

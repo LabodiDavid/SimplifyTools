@@ -40,9 +40,6 @@ public final class DITSystem extends JavaPlugin implements CommandExecutor, List
         this.DIT_initialize();
         this.tab = new TabManager(this,this.config);
         this.dplug = new DitPluginManager(this);
-
-
-
         System.out.println(this.getPrefix()+"Started running.");
     }
 
@@ -74,8 +71,6 @@ public final class DITSystem extends JavaPlugin implements CommandExecutor, List
     }
     public void initOptions(){
 
-
-
         if (config.getBoolean("Saving.enabled") && config.getInt("Saving.interval")>0){
             BukkitScheduler scheduler = getServer().getScheduler();
             scheduler.scheduleSyncRepeatingTask(instance, new Runnable() {
@@ -92,7 +87,6 @@ public final class DITSystem extends JavaPlugin implements CommandExecutor, List
                 }
             }, 0L, Math.convert(Math.Convert.SECONDS,Math.Convert.TICKS,instance.config.getInt("Saving.interval")));
         }
-
 
         if (this.config.isSet("CustomAdvancement.enabled")) {
             if(config.getBoolean("CustomAdvancement.enabled")){

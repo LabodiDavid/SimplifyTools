@@ -30,12 +30,9 @@ public class DITTabCompleter implements TabCompleter {
                     }
                 }
             }
-
-
             List<String> idea = new ArrayList<>();
             List<String> result = new ArrayList<>();
             String curr_cmd = "";
-            //String[] vizsg_args = new String[args.length+1];
             List<String> vizsg_list = new ArrayList<>();
             boolean vizsg_2 = false;
             if (args.length == 1) {
@@ -79,8 +76,6 @@ public class DITTabCompleter implements TabCompleter {
                         }
                     }
                         return idea;
-
-
             }
         }
         return null;
