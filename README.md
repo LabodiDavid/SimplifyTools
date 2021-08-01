@@ -1,6 +1,6 @@
 # SimplifyTools  
 ### An 'All-in-one' helper plugin for Minecraft Spigot Servers.
-|  Build Status |                    ![ Build Status](https://ci.dit-services.tk/buildStatus/icon?job=DIT-System)                   |
+|  Build Status |                    [![Build Status](https://ci.dit-services.tk/job/SimplifyTools/badge/icon)](https://ci.dit-services.tk/job/SimplifyTools/)                   |
 |:-------------:|:-----------------------------------------------------------------------------------------------------------------:|
 |   MC Version  | ![ MC Version](https://ci.dit-services.tk/job/SimplifyTools/badge/icon?subject=MC&status=1.16.5&color=darkblue) |
 | Lines of code |               ![ Lines of code](https://tokei.rs/b1/github/LabodiDavid/SimplifyTools?category=code)               |
