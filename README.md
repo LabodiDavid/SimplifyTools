@@ -9,18 +9,18 @@
 
  - **Tab Manager** - Allows you to specify colored texts, with animations on the tab window.
 		 Also you can display the average ping, Server RAM statistics.
- ![Tab manager preview](https://ci.dit-services.tk/userContent/simplifytools/1.gif)
+ ![Tab manager preview](docs/img/1.gif)
  - **Automatic/command saving** - Allows you to schedule auto saving of the world/player data on your server, or you can initiate a save by a command.
  - **Custom Connect/Disconnect messages** - Allows you to customize the message that is broadcasted when someone joins or leaves the server.
-  ![Connect messages preview](https://ci.dit-services.tk/userContent/simplifytools/2.gif)
+  ![Connect messages preview](docs/img/2.gif)
  - **Plugin Manager** - Allows you to unload/load plugins without a server restart.
  (Note: This may be removed in 1.17.x versions for security reasons)
  - **Gameplay statistics** - You can check your gameplay statistics such as player/mob kills, etc.
  (Note: The plugin just shows the stats not recording itself, so stats before installing this plugin are counted too.)
-  ![Stats preview](https://ci.dit-services.tk/userContent/simplifytools/3.gif)
+  ![Stats preview](docs/img/3.gif)
  - **Custom Advancement Messages** - You can customize the advancement messages in three categories: advancement, goal, challenge. 
  (Note: The advancement names are currently only can be displayed in english. In future versions there will be a feature to translate to any languages.)
-  ![Advancement Messages preview](https://ci.dit-services.tk/userContent/simplifytools/4.gif)
+  ![Advancement Messages preview](docs/img/4.gif)
  - **Logging** - A logger with fully customizable format for dis/connect, chat, commands actions.
 ### [Check the config file for more explanation and examples](https://github.com/LabodiDavid/SimplifyTools/blob/main/src/main/resources/config.yml)
 
