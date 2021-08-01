@@ -1,0 +1,98 @@
+name: SimplifyTools
+version: ${project.version}
+main: tk.ditservices.DITSystem
+api-version: 1.13
+prefix: SimplifyTools
+load: POSTWORLD
+description: SimplifyTools - An All-in-one helper plugin.
+author: SimplifyDave
+website: https://dit-services.tk
+commands:
+  st:
+    description: The default command for the plugin.
+    usage: "/st"
+    permission: st.st
+  st help:
+    description: Displays all SimplifyTools related commands.
+    usage: "/st help"
+    permission: st.help
+  st ping:
+    description: Displays your ping to the current server.
+    usage: "/st ping"
+    permission: st.ping
+  st stats:
+    description: Displays your gameplay statistics.
+    usage: "/st stats"
+    permission: st.stats
+  st save-all:
+    description: Saves the players, worlds data on the server.
+    usage: "/st save-all"
+    permission: st.save
+  st pmanager:
+    description: A built-in plugin manager.
+    usage: "/st pmanager <LOAD/UNLOAD>"
+    permission: st.pmanager
+  st pmanager load:
+    description: Plugin loading.
+    usage: "/st pmanager load <PLUGIN-NAME>"
+    permission: st.pmanager.load
+  st pmanager unload:
+    description: Plugin unloading.
+    usage: "/st pmanager unload <PLUGIN-NAME>"
+    permission: st.pmanager.unload
+  st reload:
+    description: Plugin settings reload.
+    usage: "/st reload"
+    permission: st.reload
+
+permissions:
+  st.help:
+    description: Enables the help command.
+    default: true
+  st.status:
+    description: Enables the status command.
+    default: true
+  st.ping:
+    description: Enables the ping command.
+    default: true
+  st.reload:
+    description: Enables the reload command.
+    default: op
+  st.pmanager.load:
+    description: Enables the plugin loading command.
+    default: op
+  st.pmanager.unload:
+    description: Enables the plugin disabling command.
+    default: op
+  st.st:
+    description: This is the default permission.
+    default: true
+  st.stats:
+    description: Enables the stats command.
+    default: true
+  st.save:
+    description: Enables the save-all command.
+    default: op
+    st.admin:
+      description: An admin permission for the maintenance commands and for update notifies.
+      default: op
+      children:
+        st.save: true
+        st.pmanager.*: true
+    st.*:
+      description: Wildcard permission for all commands.
+      default: op
+      children:
+        st.st: true
+        st.help: true
+        st.ping: true
+        st.status: true
+        st.save: true
+        st.stats: true
+        st.settings: true
+    st.pmanager.*:
+      description: The plugin manager commands.
+      default: op
+      children:
+        st.pmanager.load: true
+        st.pmanager.unload: true

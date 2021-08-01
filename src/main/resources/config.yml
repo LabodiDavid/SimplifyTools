@@ -1,0 +1,87 @@
+# SimplifyTools
+# Config file
+#
+#   REMOVING SETTINGS MAY CAUSE ERRORS DO NOT DO THAT!!!
+#
+#
+#  ░██████╗██╗███╗░░░███╗██████╗░██╗░░░░░██╗███████╗██╗░░░██╗████████╗░█████╗░░█████╗░██╗░░░░░░██████╗
+#  ██╔════╝██║████╗░████║██╔══██╗██║░░░░░██║██╔════╝╚██╗░██╔╝╚══██╔══╝██╔══██╗██╔══██╗██║░░░░░██╔════╝
+#  ╚█████╗░██║██╔████╔██║██████╔╝██║░░░░░██║█████╗░░░╚████╔╝░░░░██║░░░██║░░██║██║░░██║██║░░░░░╚█████╗░
+#  ░╚═══██╗██║██║╚██╔╝██║██╔═══╝░██║░░░░░██║██╔══╝░░░░╚██╔╝░░░░░██║░░░██║░░██║██║░░██║██║░░░░░░╚═══██╗
+#  ██████╔╝██║██║░╚═╝░██║██║░░░░░███████╗██║██║░░░░░░░░██║░░░░░░██║░░░╚█████╔╝╚█████╔╝███████╗██████╔╝
+#  ╚═════╝░╚═╝╚═╝░░░░░╚═╝╚═╝░░░░░╚══════╝╚═╝╚═╝░░░░░░░░╚═╝░░░░░░╚═╝░░░░╚════╝░░╚════╝░╚══════╝╚═════╝░
+#
+# Logging options
+# If you enable one of them, a txt file will be created every day automatically with the current date.
+Log:
+  Chat: false #Chat messages
+  Connect: false #Connections, disconnects
+  Command: false #All command will be logged !for example private messaging, authme passwords!!
+  #You can customize the format for the three types.
+  # These values will be replaced like that: {DATE} = YYYY-MM-DD, {TIME} = HH:MM:SS, {ACTION} = [CHAT] or [COMMAND] etc..
+  # Example connect in the log: [2020-12-08] - 19:07:04 - [CONNECT] - PlayerName UUID: 01010101-1010-asd1-1212-404826345656
+  FormatChat: '[{DATE}] - {TIME} - {ACTION} - {PLAYERNAME}: {MSG}'
+  FormatConnect: '[{DATE}] - {TIME} - {ACTION} - {PLAYERNAME} UUID: {UUID}' # Note: The disconnect message will be based on this too.
+  FormatCommand: '[{DATE}] - {TIME} - {ACTION} - {PLAYERNAME}: {COMMAND}'
+
+# Custom Advance Messages
+# Replaces vanilla advancement broadcasting
+CustomAdvancement:
+  enabled: false
+  formats:
+    #  {NAME} represent the player's name.
+    #  {ADV} represent the advancement name.
+   advancement: '&l&f{NAME}&r &bhas completed the &f[&a&n{ADV}&r&f]&b advancement!'
+   goal: '&l&f{NAME}&r&f]&b &bhas reached the  &f[&a&n{ADV}&r&f]&b goal!'
+   challenge: '&l&f{NAME}&r &bcompleted the &f[&a&n{ADV}&r&f]&b challenge!'
+
+# Tab Customization
+#
+# You can use Minecraft color, format codes with '&' in the texts.
+# example: header: &cThis server is using SimplifyTools by &1SimplifyDave
+# Note: Use \n to add a new line
+# Note: The RAM values are in MB.
+# {USEDRAM} {TOTALRAM} {FREERAM} {AVERAGEPING} {ONLINEPLAYERS} {MAXPLAYERS} represents their values.
+# NOTICE: You will need a full MC server restart when you want to apply new settings here.
+Tab:
+  enabled: false # If you want to enable customization on the tab
+  refreshRate: 2 # The refresh rate in SECONDS
+  headerAnimation: #If animation set to true, you can set the animations per line.
+#If you don't want animations, just leave one line text here!
+    #- '&l&cThis is an example header text without animation\nAnd this is a new line!'
+  - '&cThis server is using SimplifyTools by &1SimplifyDave \nAverage ping: {AVERAGEPING} ms'
+  - '&bThis server is using SimplifyTools by &9SimplifyDave \nAverage ping: {AVERAGEPING} ms'
+  - '&b&lThis server is using SimplifyTools by &9SimplifyDave \nAverage ping: {AVERAGEPING} ms'
+
+  footerAnimation:
+#If you don't want animations, just leave one line text here!
+    #- '&l&cThis is an example footer text without animation\n with multiple lines in one element!'
+  - '&l&4Server RAM Usage: {TOTALRAM}MB / {USEDRAM}MB\nOnline players: {MAXPLAYERS}/{ONLINEPLAYERS}'
+  - '&l&aServer RAM Usage: {TOTALRAM}MB / {USEDRAM}MB\nOnline players: {MAXPLAYERS}/{ONLINEPLAYERS}'
+
+# Custom Connect/Disconnect messages
+CustomMsg:
+  enabled: false
+  connect: '{PREFIX}{NAME} &aconnected to the server.'
+  disconnect: '{PREFIX}{NAME} leaved the game.'
+
+# Auto Save options
+# Saves Worlds/Users data to disk.
+# Note: You can do a save like this with the /st save-all command.
+# NOTICE: You will need a full MC server restart when you want to apply new settings here.
+Saving:
+  enabled: true
+  onDisconnect: true # When a player disconnects
+  interval: 0 # Auto saving interval in SECONDS. If this set to zero it means disabled.
+  broadcastMsgProgress: '{PREFIX}Auto save in progress..'
+  broadcastMsgDone: '{PREFIX}Auto save done.'
+
+# Cooldown options (only applicable for this plugin!)
+Cooldown:
+  enabled: true
+  # The time must be passed between using this plugin commands.
+  seconds: 2 #The command cooldown in seconds
+  Msg: '{PREFIX} Please wait {SECONDS} seconds!' # The message when the user spamming a command
+
+# Miscellaneous
+Prefix: '&a[&fSimplify&7Tools&2] &4- &f'
