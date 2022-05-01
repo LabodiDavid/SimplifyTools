@@ -1,8 +1,8 @@
 # SimplifyTools  
-### An 'All-in-one' helper plugin for Minecraft Spigot Servers.
-|  Build Status |                    [![Build Status](https://ci.dit-services.tk/job/SimplifyTools/badge/icon)](https://ci.dit-services.tk/job/SimplifyTools/)                   |
+### An 'All-in-one' helper plugin for Minecraft Spigot Servers with a goal of combine useful plugins to a one.
+|  Build Status |                    [![Build Status](https://ci.ditservices.hu/job/SimplifyTools/badge/icon)](https://ci.ditservices.hu/job/SimplifyTools/)                   |
 |:-------------:|:-----------------------------------------------------------------------------------------------------------------:|
-|   MC Version  | ![ MC Version](https://ci.dit-services.tk/job/SimplifyTools/badge/icon?subject=MC&status=1.16.5&color=darkblue) |
+|   MC Version  | ![ MC Version](https://ci.ditservices.hu/job/SimplifyTools/badge/icon?subject=MC&status=1.18.2&color=darkblue) |
 | Lines of code |               ![ Lines of code](https://tokei.rs/b1/github/LabodiDavid/SimplifyTools?category=code)               |
 |     Files     |                   ![ Files](https://tokei.rs/b1/github/LabodiDavid/SimplifyTools?category=files)                  |
 ## Features
@@ -23,13 +23,14 @@
   ![Advancement Messages preview](docs/img/4.gif)
  - **Logging** - A logger with fully customizable format for dis/connect, chat, commands actions.
 ### [Check the config file for more explanation and examples](https://github.com/LabodiDavid/SimplifyTools/blob/main/src/main/resources/config.yml)
-
+_________________
 ### [Commands & Permissions](docs/cmd_perms.md)
-
+_________________
 ### If you have an idea or bug report [Create an issue](https://github.com/LabodiDavid/SimplifyTools/issues/new/choose) or [Create a pull request](https://github.com/LabodiDavid/SimplifyTools/compare)
-
+_________________
 ## Main goal
-My main goal is to create a single plugin that has many features, so it's can replace so many plugins that i often use on my servers while lowering the plugins count.
-
+My main goal is to create a single plugin that has many features, so it's can replace plugins that i often use on my servers while lowering the plugins count.
+_________________
 ## 3rd party libraries used by this plugin
 ### [Config-Updater by tchristofferson](https://github.com/tchristofferson/Config-Updater)
+### [SpigotUpdateChecker by JEFF-Media-GbR](https://github.com/JEFF-Media-GbR/Spigot-UpdateChecker)

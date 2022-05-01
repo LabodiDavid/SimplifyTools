@@ -91,10 +91,12 @@ public class DitCmd implements CommandExecutor {
                             return true;
                         }
                         if (args[1].equalsIgnoreCase("load")) {
-                            PluginCmd.handleLoad(sender,args);
+                            //PluginCmd.handleLoad(sender,args);
+                            PluginCmd.LoadPlugin(sender,args);
                         }
                         if (args[1].equalsIgnoreCase("unload")) {
-                            PluginCmd.handleUnload(sender,args);
+                            //PluginCmd.handleUnload(sender,args);
+                            PluginCmd.UnloadPlugin(sender, args);
                         }
                     }
                 }

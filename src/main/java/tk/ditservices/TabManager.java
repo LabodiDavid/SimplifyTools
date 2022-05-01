@@ -1,19 +1,21 @@
 package tk.ditservices;
 
+import net.minecraft.network.chat.ChatComponentText;
+import net.minecraft.network.chat.IChatBaseComponent;
+import net.minecraft.network.protocol.game.PacketPlayOutPlayerListHeaderFooter;
+import net.minecraft.server.network.PlayerConnection;
+import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import tk.ditservices.utils.Math;
 import tk.ditservices.utils.Server;
-import net.minecraft.server.v1_16_R3.ChatComponentText;
+/*import net.minecraft.server.v1_16_R3.ChatComponentText;
 import net.minecraft.server.v1_16_R3.IChatBaseComponent;
 import net.minecraft.server.v1_16_R3.PacketPlayOutPlayerListHeaderFooter;
+*/
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+//import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,24 +55,19 @@ public class TabManager {
             return;
         }
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-            PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter();
             int count1 = 0; //headers
             int count2 = 0; //footers
             @Override
             public void run() {
                 try {
                     //Tab code
-                    Field a = packet.getClass().getDeclaredField("header");
-                    a.setAccessible(true);
-                    Field b = packet.getClass().getDeclaredField("footer");
-                    b.setAccessible(true);
+
                     if (count1>=headers.size()){
                         count1=0;
                     }
                     if (count2>=footers.size()){
                         count2=0;
                     }
-
                     //Re adding all lines  where we replaced something like the RAM usage to every refresh
                     //display current value. (We check those lines in the init())
                     if (DynamicHeaders.size()>0 && count1 < DynamicHeaders.size()){
@@ -84,12 +81,20 @@ public class TabManager {
                         }
                     }
 
+                    PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter(headers.get(count1),footers.get(count2));
+                    /*Field a = packet.getClass().getDeclaredField("header");
+                    a.setAccessible(true);
+                    Field b = packet.getClass().getDeclaredField("footer");
+                    b.setAccessible(true);
+
                     a.set(packet, headers.get(count1));
                     b.set(packet,footers.get(count2));
-
+                    */
                     if (Bukkit.getOnlinePlayers().size() !=0){
                         for (Player player : Bukkit.getOnlinePlayers()){
-                            ((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
+                            PlayerConnection pConn = ((CraftPlayer)player).getHandle().b;
+                            //((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
+                            pConn.a(packet);
                         }
                     }
                     if (headers.size()>1){

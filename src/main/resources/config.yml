@@ -72,7 +72,7 @@ CustomMsg:
 Saving:
   enabled: true
   onDisconnect: true # When a player disconnects
-  interval: 0 # Auto saving interval in SECONDS. If this set to zero it means disabled.
+  interval: 1800 # Auto saving interval in SECONDS. If this set to zero it means disabled.
   broadcastMsgProgress: '{PREFIX}Auto save in progress..'
   broadcastMsgDone: '{PREFIX}Auto save done.'
 

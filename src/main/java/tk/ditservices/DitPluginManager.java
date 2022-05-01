@@ -9,15 +9,13 @@ import org.bukkit.plugin.*;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.*;
+/*
 public class DitPluginManager {
     private static DITSystem plugin;
     public DitPluginManager(DITSystem instance){
         plugin = instance;
     }
-    /**
-     * Loads the requested plugin.
-     * @param pluginName Plugin name in string.
-     */
+
     public static int load(final String pluginName) {
         PluginManager pm = Bukkit.getServer().getPluginManager();
         boolean there = false;
@@ -144,6 +142,7 @@ public class DitPluginManager {
                     }
 
                     if (commandMap != null) {
+
                         for (Iterator<Map.Entry<String, Command>> it = knownCommands.entrySet().iterator(); it.hasNext(); ) {
                             Map.Entry<String, Command> entry = it.next();
                             if (entry.getValue() instanceof PluginCommand) {
@@ -181,3 +180,4 @@ public class DitPluginManager {
 
 
 }
+*/

@@ -1,7 +1,7 @@
 package tk.ditservices.utils;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.*;
 import org.bukkit.entity.Player;
 import java.lang.Math;
 
@@ -37,12 +37,13 @@ public class Server {
      */
     public static int getPlayerPing(Player player){
         try {
-            Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
-            return (int) entityPlayer.getClass().getField("ping").get(entityPlayer);
-        } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException | NoSuchFieldException | InvocationTargetException e) {
+            //Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
+            //return (int) entityPlayer.getClass().getField("ping").get(entityPlayer);
+            return player.getPing();
+        } catch (IllegalArgumentException | SecurityException e) {
             e.printStackTrace();
+            return -1;
         }
-        return -1;
     }
     /**
      * Get an average of the currently online player's ping.
@@ -54,7 +55,7 @@ public class Server {
         if (Bukkit.getOnlinePlayers().size() !=0){
             onlineplayers =Bukkit.getOnlinePlayers().size();
             for (Player player : Bukkit.getOnlinePlayers()){
-                sum += Server.getPlayerPing(player);
+                sum += player.getPing();
             }
             avg = Math.floorDiv(sum,onlineplayers);
 

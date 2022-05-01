@@ -1,12 +1,44 @@
 package tk.ditservices.commands;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import tk.ditservices.DITSystem;
-import tk.ditservices.DitPluginManager;
+//import tk.ditservices.DitPluginManager;
 import org.bukkit.command.CommandSender;
 
 
 public class PluginCmd {
-    public static boolean handleLoad(CommandSender sender, String[] args){
+    public static boolean LoadPlugin(CommandSender sender, String[] args){
+        Plugin plugin = Bukkit.getPluginManager().getPlugin(args[2]);
+        if (plugin == null) {
+            sender.sendMessage(DITSystem.getInstance().getPrefix()+"Plugin not exist!");
+            return false;
+        }
+        if (plugin.isEnabled()){
+            sender.sendMessage(DITSystem.getInstance().getPrefix()+"Plugin "+plugin.getName()+" already enabled!");
+            return true;
+        }
+
+        Bukkit.getPluginManager().enablePlugin(plugin);
+        sender.sendMessage(DITSystem.getInstance().getPrefix()+"Plugin "+plugin.getName()+" successfully enabled!");
+        return true;
+    }
+    public static boolean UnloadPlugin(CommandSender sender, String[] args){
+        Plugin plugin = Bukkit.getPluginManager().getPlugin(args[2]);
+        if (plugin == null) {
+            sender.sendMessage(DITSystem.getInstance().getPrefix()+"Plugin not exist!");
+            return false;
+        }
+        if (!plugin.isEnabled()){
+            sender.sendMessage(DITSystem.getInstance().getPrefix()+"Plugin "+plugin.getName()+" already disabled!");
+            return true;
+        }
+        Bukkit.getPluginManager().disablePlugin(plugin);
+        sender.sendMessage(DITSystem.getInstance().getPrefix()+"Plugin "+plugin.getName()+" successfully disabled!");
+        return true;
+    }
+
+    /*public static boolean handleLoad(CommandSender sender, String[] args){
         switch (DitPluginManager.load(args[2])){
             case 0: sender.sendMessage(DITSystem.getInstance().getPrefix()+" Plugin loaded."); return true;
             case 2: sender.sendMessage(DITSystem.getInstance().getPrefix()+"Missing dependency!"); return true;
@@ -26,5 +58,5 @@ public class PluginCmd {
             default: break;
         }
         return false;
-    }
+    }*/
 }

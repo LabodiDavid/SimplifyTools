@@ -5,19 +5,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class PingCmd {
     public static boolean Run(CommandSender sender) {
         DITSystem plugin = DITSystem.getInstance();
         if (sender instanceof Player) {
             Player player = (Player) sender;
             try {
-                Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
-                int ping = (int) entityPlayer.getClass().getField("ping").get(entityPlayer);
-                player.sendMessage(plugin.getPrefix() + "Your response time to the server: " + ping + " ms");
+                player.sendMessage(plugin.getPrefix() + "Your response time to the server: " + player.getPing() + " ms");
                 return true;
-            } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException | NoSuchFieldException | InvocationTargetException e) {
+            } catch (IllegalArgumentException | SecurityException e) {
                 e.printStackTrace();
             }
         } else {

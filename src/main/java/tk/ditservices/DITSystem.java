@@ -6,7 +6,7 @@ import tk.ditservices.listeners.ChatEvents;
 import tk.ditservices.listeners.LogChat;
 import tk.ditservices.listeners.LogCommand;
 import tk.ditservices.listeners.LogConnect;
-import tk.ditservices.utils.ConfigUpdater;
+import com.tchristofferson.configupdater.ConfigUpdater;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameRule;
@@ -15,9 +15,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import tk.ditservices.utils.Math;
+
+import com.jeff_media.updatechecker.UpdateCheckSource;
+import com.jeff_media.updatechecker.UpdateChecker;
+import com.jeff_media.updatechecker.UserAgentBuilder;
 
 import java.io.*;
 import java.util.Collections;
@@ -27,7 +30,7 @@ import java.util.logging.Logger;
 public final class DITSystem extends JavaPlugin implements CommandExecutor, Listener {
     private static DITSystem instance;
     Logger log = Bukkit.getLogger();
-    private DitPluginManager dplug;
+    //private DitPluginManager dplug;
     public TabManager tab;
 
     public FileConfiguration config;
@@ -39,8 +42,18 @@ public final class DITSystem extends JavaPlugin implements CommandExecutor, List
         instance = this;
         this.DIT_initialize();
         this.tab = new TabManager(this,this.config);
-        this.dplug = new DitPluginManager(this);
+        //this.dplug = new DitPluginManager(this);
         System.out.println(this.getPrefix()+"Started running.");
+
+        new UpdateChecker(this, UpdateCheckSource.GITHUB_RELEASE_TAG, "LabodiDavid/SimplifyTools")
+                .setDownloadLink("https://github.com/LabodiDavid/SimplifyTools/releases")
+                .setDonationLink("https://paypal.me/labodidavid")
+                .setChangelogLink("https://github.com/LabodiDavid/SimplifyTools/blob/main/docs/ChangeLog.md")
+                .setNotifyOpsOnJoin(true)
+                .setNotifyByPermissionOnJoin("st.admin")
+                .setUserAgent(new UserAgentBuilder().addPluginNameAndVersion())
+                .checkEveryXHours(24)
+                .checkNow();
     }
 
     private void DIT_initialize() {

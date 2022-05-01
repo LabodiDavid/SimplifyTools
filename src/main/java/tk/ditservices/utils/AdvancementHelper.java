@@ -1,5 +1,6 @@
 package tk.ditservices.utils;
 
+import net.minecraft.advancements.Advancement;
 import tk.ditservices.DITLog;
 import tk.ditservices.DITSystem;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -99,6 +100,7 @@ public class AdvancementHelper {
     public String[] out_type = new String[3];
 
     private void initialize(){
+
         if (config.isSet("CustomAdvancement.formats.advancement")) {
             out_type[0] = config.getString("CustomAdvancement.formats.advancement");
         }
