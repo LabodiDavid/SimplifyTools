@@ -1,6 +1,5 @@
 package tk.ditservices.utils;
 
-import net.minecraft.advancements.Advancement;
 import tk.ditservices.DITLog;
 import tk.ditservices.DITSystem;
 import org.bukkit.configuration.file.FileConfiguration;

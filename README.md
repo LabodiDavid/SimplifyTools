@@ -14,7 +14,6 @@
  - **Custom Connect/Disconnect messages** - Allows you to customize the message that is broadcasted when someone joins or leaves the server.
   ![Connect messages preview](docs/img/2.gif)
  - **Plugin Manager** - Allows you to unload/load plugins without a server restart.
- (Note: This may be removed in 1.17.x versions for security reasons)
  - **Gameplay statistics** - You can check your gameplay statistics such as player/mob kills, etc.
  (Note: The plugin just shows the stats not recording itself, so stats before installing this plugin are counted too.)
   ![Stats preview](docs/img/3.gif)
@@ -30,6 +29,22 @@ _________________
 _________________
 ## Main goal
 My main goal is to create a single plugin that has many features, so it's can replace plugins that i often use on my servers while lowering the plugins count.
+_________________
+## Building 
+#### Dependencies:
+- spigot-api-1.18.2-R0.1-SNAPSHOT-shaded.jar (from Spigot Repo Downloads Automatically OR **BuildTools** generated `Spigot\Spigot-API\target\`)
+- brigadier-1.0.18.jar (from **BuildTools** generated `spigot-x.xx.x.jar\META-INF\libraries\`)
+- craftbukkit-1.18.2-R0.1-SNAPSHOT.jar (from downloaded `craftbukkit-x.xx.x.jar\META-INF\versions\`)
+##### Installing Dependencies:
+You can install the dependencies to your maven repository through CLI like this:
+
+- mvn install:install-file -Dfile=spigot-api-1.18.2-R0.1-SNAPSHOT-shaded.jar -DgroupId=org.spigotmc -DartifactId=spigot-api -Dversion=1.18.2-R0.1-SNAPSHOT -Dpackaging=jar
+
+
+- mvn install:install-file -Dfile=craftbukkit-1.18.2-R0.1-SNAPSHOT.jar -DgroupId=org.bukkit -DartifactId=craftbukkit -Dversion=1.18.2-R0.1-SNAPSHOT -Dpackaging=jar
+
+
+- mvn install:install-file -Dfile=brigadier-1.0.18.jar -DgroupId=com.mojang -DartifactId=brigadier -Dversion=1.0.18 -Dpackaging=jar
 _________________
 ## 3rd party libraries used by this plugin
 ### [Config-Updater by tchristofferson](https://github.com/tchristofferson/Config-Updater)

@@ -50,6 +50,8 @@ public class TabManager {
 
     }
 
+
+
     public void showTab(){
         if (headers.isEmpty() && footers.isEmpty()){
             return;
@@ -82,14 +84,7 @@ public class TabManager {
                     }
 
                     PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter(headers.get(count1),footers.get(count2));
-                    /*Field a = packet.getClass().getDeclaredField("header");
-                    a.setAccessible(true);
-                    Field b = packet.getClass().getDeclaredField("footer");
-                    b.setAccessible(true);
 
-                    a.set(packet, headers.get(count1));
-                    b.set(packet,footers.get(count2));
-                    */
                     if (Bukkit.getOnlinePlayers().size() !=0){
                         for (Player player : Bukkit.getOnlinePlayers()){
                             PlayerConnection pConn = ((CraftPlayer)player).getHandle().b;
@@ -182,6 +177,7 @@ public class TabManager {
             }
         }
     }
+
 
     /**
      * Replaces the msg values to their represents and recognizes MC color codes.
