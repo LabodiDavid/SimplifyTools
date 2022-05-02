@@ -39,5 +39,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:1.30" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.bukkit:craftbukkit:1.18.2-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.mojang:brigadier:1.0.18" level="project" />
+    <orderEntry type="library" name="Maven: org.bstats:bstats-bukkit:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.bstats:bstats-base:3.0.0" level="project" />
   </component>
 </module>

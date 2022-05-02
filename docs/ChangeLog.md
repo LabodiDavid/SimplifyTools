@@ -4,5 +4,6 @@
    - Minor changes
    - Temporarily reworked Plugin Manager
    - Added Update Checker (https://github.com/JEFF-Media-GbR/Spigot-UpdateChecker)
+   - Implemented Metrics (bStats)
  - 1.0.0 - First Release
      - Notice: If the /st reload command not reloading the new settings, you need to restart your MC server.

@@ -59,6 +59,10 @@
                             <pattern>com.jeff_media.updatechecker</pattern>
                             <shadedPattern>tk.ditservices.updatechecker</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>tk.ditservices.bstats</shadedPattern>
+                        </relocation>
                     </relocations>
                 </configuration>
                 <executions>
@@ -129,6 +133,12 @@
             <artifactId>brigadier</artifactId>
             <version>1.0.18</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.0.0</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
