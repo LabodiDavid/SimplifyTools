@@ -1,4 +1,4 @@
-package tk.ditservices;
+package hu.ditservices.utils;
 
 
 import java.io.BufferedWriter;
@@ -10,7 +10,7 @@ import java.util.Calendar;
 
 import org.bukkit.event.Listener;
 
-public class DITLog implements Listener {
+public class Logger implements Listener {
     public static String Location = "plugins/SimplifyTools/logs/";
 
     /**
@@ -34,9 +34,9 @@ public class DITLog implements Listener {
      * @param text The text to log.
      */
     public static void logLine(String text){
-        String fileName = DITLog.getDate()+".txt";
+        String fileName = Logger.getDate()+".txt";
 
-        File file = new File(DITLog.Location+fileName);
+        File file = new File(Logger.Location+fileName);
         if (!file.exists()){ createFile(); }
 
         try {
@@ -51,12 +51,12 @@ public class DITLog implements Listener {
 
     private static void createFile(){
         String fileName = getDate() + ".txt";
-        File directory = new File(DITLog.Location);
+        File directory = new File(Logger.Location);
         if(!directory.exists()){
             directory.mkdirs();
         }
 
-        File file = new File(DITLog.Location + fileName);
+        File file = new File(Logger.Location + fileName);
         if( !file.exists() ){
             try {
                 file.createNewFile();

@@ -1,5 +1,6 @@
-package tk.ditservices;
-import tk.ditservices.DITSystem;
+package hu.ditservices.handlers;
+/*
+import hu.ditservices.DITSystem;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.PluginCommand;
@@ -9,7 +10,8 @@ import org.bukkit.plugin.*;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.*;
-/*
+
+
 public class DitPluginManager {
     private static DITSystem plugin;
     public DitPluginManager(DITSystem instance){

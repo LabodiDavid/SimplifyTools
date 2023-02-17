@@ -1,13 +1,20 @@
-package tk.ditservices.utils;
+package hu.ditservices.utils;
 
-import tk.ditservices.DITSystem;
+import hu.ditservices.STPlugin;
+import org.bukkit.GameRule;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.lang.reflect.Method;
+import java.util.List;
+
 public class AdvancementHelper {
-    private DITSystem plugin;
-    private FileConfiguration config;
-    public AdvancementHelper(DITSystem instance, FileConfiguration c){
-        this.plugin = instance;
+    private final STPlugin plugin = STPlugin.getInstance();
+    private final FileConfiguration config;
+
+    private boolean initialized = false;
+
+    public AdvancementHelper(FileConfiguration c){
         this.config = c;
         this.initialize();
     }
@@ -108,7 +115,32 @@ public class AdvancementHelper {
         if (config.isSet("CustomAdvancement.formats.challenge")) {
             out_type[2] = config.getString("CustomAdvancement.formats.challenge");
         }
+        String disablemsg = plugin.getPrefix()+"Disabling vanilla advancement messages for ";
+        List<World> worlds = this.plugin.getServer().getWorlds();
+        Method setRuleMethod, getRuleMethod;
+        try {
+                for (World w : worlds) {
+                    if (Version.ServerVersion.isCurrentEqualOrLower(Version.ServerVersion.v1_12_R1)){
+                        getRuleMethod = w.getClass().getDeclaredMethod("getGameRuleValue", String.class);
+                        if (getRuleMethod.invoke(w,"announceAdvancements")=="true"){
+                            setRuleMethod = w.getClass().getDeclaredMethod("setGameRuleValue", String.class, String.class);
+                            setRuleMethod.invoke(w,"announceAdvancements", "false");
+                            this.plugin.getLogger().info(disablemsg + w.getName());
+                        }
+                    }else{
+                        getRuleMethod = w.getClass().getDeclaredMethod("getGameRuleValue", GameRule.class);
+                        if ((boolean)getRuleMethod.invoke(w,GameRule.ANNOUNCE_ADVANCEMENTS)){
+                            setRuleMethod = w.getClass().getDeclaredMethod("setGameRule", GameRule.class, Object.class);
+                            setRuleMethod.invoke(w,GameRule.ANNOUNCE_ADVANCEMENTS,false);
+                            this.plugin.getLogger().info(disablemsg + w.getName());
+                        }
 
+                    }
+                    //w.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
+                }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public String getText(String PlayerName,String title){
         String rtrn = this.out_type[this.type];

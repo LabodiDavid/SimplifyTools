@@ -41,23 +41,21 @@ CustomAdvancement:
 # example: header: &cThis server is using SimplifyTools by &1SimplifyDave
 # Note: Use \n to add a new line
 # Note: The RAM values are in MB.
-# {USEDRAM} {TOTALRAM} {FREERAM} {AVERAGEPING} {ONLINEPLAYERS} {MAXPLAYERS} represents their values.
+# {USEDRAM} {TOTALRAM} {FREERAM} {AVERAGEPING} {ONLINEPLAYERS} {MAXPLAYERS} {MOTD} represents their values.
+# {UPTIME} will be replaced with the server's uptime in the following format: "xx days xx hours xx minutes"
 # NOTICE: You will need a full MC server restart when you want to apply new settings here.
 Tab:
   enabled: false # If you want to enable customization on the tab
-  refreshRate: 2 # The refresh rate in SECONDS
-  headerAnimation: #If animation set to true, you can set the animations per line.
-#If you don't want animations, just leave one line text here!
+  refreshRate: 1 # The refresh rate in SECONDS
+  headerAnimation:
+    - '&e&n{MOTD}\n&r&eOnline Players: &6{MAXPLAYERS}/{ONLINEPLAYERS}\n&eAverage ping: &6{AVERAGEPING} ms'
+    - '&6&l&n{MOTD}\n&r&6Online Players: &e{MAXPLAYERS}/{ONLINEPLAYERS}\n&6Average ping: &e{AVERAGEPING} ms'
+    #If you don't want animations, just leave one line text here!
     #- '&l&cThis is an example header text without animation\nAnd this is a new line!'
-  - '&cThis server is using SimplifyTools by &1SimplifyDave \nAverage ping: {AVERAGEPING} ms'
-  - '&bThis server is using SimplifyTools by &9SimplifyDave \nAverage ping: {AVERAGEPING} ms'
-  - '&b&lThis server is using SimplifyTools by &9SimplifyDave \nAverage ping: {AVERAGEPING} ms'
 
   footerAnimation:
-#If you don't want animations, just leave one line text here!
-    #- '&l&cThis is an example footer text without animation\n with multiple lines in one element!'
-  - '&l&4Server RAM Usage: {TOTALRAM}MB / {USEDRAM}MB\nOnline players: {MAXPLAYERS}/{ONLINEPLAYERS}'
-  - '&l&aServer RAM Usage: {TOTALRAM}MB / {USEDRAM}MB\nOnline players: {MAXPLAYERS}/{ONLINEPLAYERS}'
+    - '&l&7Server Statistics:\n&e&lRAM Usage: &6{TOTALRAM}MB / {USEDRAM}MB\n&e&lUptime: &6{UPTIME}\n&e&lTPS: &6{TPS}'
+    - '&l&7Server Statistics:\n&6&lRAM Usage: &e{TOTALRAM}MB / {USEDRAM}MB\n&6&lUptime: &e{UPTIME}\n&6&lTPS: &e{TPS}'
 
 # Custom Connect/Disconnect messages
 CustomMsg:

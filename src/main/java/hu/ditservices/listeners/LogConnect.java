@@ -1,7 +1,7 @@
-package tk.ditservices.listeners;
+package hu.ditservices.listeners;
 
-import tk.ditservices.DITLog;
-import tk.ditservices.DITSystem;
+import hu.ditservices.utils.Logger;
+import hu.ditservices.STPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,11 +13,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class LogConnect implements Listener {
-    DITSystem plugin;
+    STPlugin plugin;
     private String JoinMsg;
     private String LeaveMsg;
     FileConfiguration config;
-    public LogConnect(DITSystem instance){
+    public LogConnect(STPlugin instance){
         this.plugin = instance;
         this.config = plugin.config;
         if (config.getBoolean("CustomMsg.enabled")){
@@ -39,8 +39,8 @@ public class LogConnect implements Listener {
 
         if (config.getBoolean("Log.Connect")) {
             String format = config.isSet("Log.FormatConnect") ? config.getString("Log.FormatConnect") : "[{DATE}] - {TIME} - {ACTION} - {PLAYERNAME} UUID: {UUID}";
-            String LogMsg = format.replace("{DATE}",DITLog.getDate()).replace("{TIME}",DITLog.getTime()).replace("{PLAYERNAME}",player.getDisplayName()).replace("{UUID}",player.getUniqueId().toString()).replace("{ACTION}","[CONNECT]");
-            DITLog.logLine(ChatColor.stripColor(LogMsg));
+            String LogMsg = format.replace("{DATE}", Logger.getDate()).replace("{TIME}", Logger.getTime()).replace("{PLAYERNAME}",player.getDisplayName()).replace("{UUID}",player.getUniqueId().toString()).replace("{ACTION}","[CONNECT]");
+            Logger.logLine(ChatColor.stripColor(LogMsg));
         }
     }
     @EventHandler(priority = EventPriority.MONITOR)
@@ -55,8 +55,8 @@ public class LogConnect implements Listener {
         }
         if (config.getBoolean("Log.Connect")) {
             String format = config.isSet("Log.FormatConnect") ? config.getString("Log.FormatConnect") : "[{DATE}] - {TIME} - {ACTION} - {PLAYERNAME} UUID: {UUID}";
-            String LogMsg = format.replace("{DATE}",DITLog.getDate()).replace("{TIME}",DITLog.getTime()).replace("{PLAYERNAME}",player.getDisplayName()).replace("{UUID}",player.getUniqueId().toString()).replace("{ACTION}","[DISCONNECT]");
-            DITLog.logLine(ChatColor.stripColor(LogMsg));
+            String LogMsg = format.replace("{DATE}", Logger.getDate()).replace("{TIME}", Logger.getTime()).replace("{PLAYERNAME}",player.getDisplayName()).replace("{UUID}",player.getUniqueId().toString()).replace("{ACTION}","[DISCONNECT]");
+            Logger.logLine(ChatColor.stripColor(LogMsg));
         }
         if (config.getBoolean("Saving.enabled")){
             if(config.getBoolean("Saving.onDisconnect")){

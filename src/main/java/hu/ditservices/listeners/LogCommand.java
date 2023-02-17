@@ -1,7 +1,7 @@
-package tk.ditservices.listeners;
+package hu.ditservices.listeners;
 
-import tk.ditservices.DITLog;
-import tk.ditservices.DITSystem;
+import hu.ditservices.utils.Logger;
+import hu.ditservices.STPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -11,9 +11,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class LogCommand implements Listener {
-    DITSystem plugin;
+    STPlugin plugin;
     FileConfiguration config;
-    public LogCommand(DITSystem instance){
+    public LogCommand(STPlugin instance){
 
         this.plugin = instance;
         this.config = plugin.config;
@@ -23,8 +23,8 @@ public class LogCommand implements Listener {
         if (config.getBoolean("Log.Command")) {
             Player player = event.getPlayer();
             String format = config.isSet("Log.FormatCommand") ? config.getString("Log.FormatCommand") : "[{DATE}] - {TIME} - {ACTION} - {PLAYERNAME}: {COMMAND}";
-            String LogMsg = format.replace("{DATE}",DITLog.getDate()).replace("{TIME}",DITLog.getTime()).replace("{PLAYERNAME}",player.getDisplayName()).replace("{COMMAND}",event.getMessage()).replace("{ACTION}","[COMMAND]");
-            DITLog.logLine(ChatColor.stripColor(LogMsg));
+            String LogMsg = format.replace("{DATE}", Logger.getDate()).replace("{TIME}", Logger.getTime()).replace("{PLAYERNAME}",player.getDisplayName()).replace("{COMMAND}",event.getMessage()).replace("{ACTION}","[COMMAND]");
+            Logger.logLine(ChatColor.stripColor(LogMsg));
         }
     }
 }

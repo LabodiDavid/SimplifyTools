@@ -1,6 +1,6 @@
-package tk.ditservices.commands;
+package hu.ditservices.commands;
 
-import tk.ditservices.DITSystem;
+import hu.ditservices.STPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.Statistic;
 import org.bukkit.command.CommandSender;
@@ -10,7 +10,7 @@ public class StatCmd {
     public static boolean Run(CommandSender sender){
         Player player = (Player) sender;
 
-        player.sendMessage(DITSystem.getInstance().getPrefix()+ ChatColor.GREEN+" === Your statistics === ");
+        player.sendMessage(STPlugin.getInstance().getPrefix()+ ChatColor.GREEN+" === Your statistics === ");
         player.sendMessage(ChatColor.AQUA+"Connects: "+(player.getStatistic(Statistic.LEAVE_GAME)+1));
         player.sendMessage(ChatColor.AQUA+"Deaths: "+player.getStatistic(Statistic.DEATHS));
         player.sendMessage(ChatColor.AQUA+"Mob kills: "+player.getStatistic(Statistic.MOB_KILLS));

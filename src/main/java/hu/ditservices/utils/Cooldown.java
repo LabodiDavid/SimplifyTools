@@ -1,23 +1,23 @@
-package tk.ditservices.utils;
+package hu.ditservices.utils;
 
-import tk.ditservices.DITSystem;
+import hu.ditservices.STPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Cooldown {
-    private int delay = 2; //seconds
-    DITSystem plugin;
-    Map<String, Long> cooldowns = new HashMap<>();
-    public long time_left;
+    STPlugin plugin;
     FileConfiguration config;
-    public Cooldown(DITSystem instance){
+
+    Map<String, Long> cooldowns = new HashMap<>();
+    private int delay = 2; //seconds
+    public long time_left;
+
+    public Cooldown(STPlugin instance){
         this.plugin = instance;
         this.config = plugin.config;
         if (config.isSet("Cooldown.seconds")){
@@ -38,21 +38,14 @@ public class Cooldown {
                 if (this.cooldowns.containsKey(player.getName())) {
                     if (this.cooldowns.get(player.getName()) > System.currentTimeMillis()) {
                         this.time_left = (this.cooldowns.get(player.getName()) - System.currentTimeMillis()) / 1000;
-                        if (this.time_left == 0) {
-                            return true;
-                        }
-                        return false;
+                        return this.time_left == 0;
                     }
                     return true;
                 }
-            } else{
+            } else {
                 return true;
             }
         }
-        if (sender instanceof ConsoleCommandSender){
-            return true;
-        }
-
         return true;
     }
     public void Add(Player player){

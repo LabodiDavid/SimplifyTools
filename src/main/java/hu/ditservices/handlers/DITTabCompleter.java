@@ -1,4 +1,4 @@
-package tk.ditservices;
+package hu.ditservices.handlers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;

@@ -1,4 +1,9 @@
 # SimplifyTools - Changelog
+ - 1.2.0
+   - Added TPS command `/st tps` 
+   - Added `{MOTD}`, `{TPS}` variable for TAB customization in the config 
+   - Refactored code for multi version support (1.12 - 1.19.3)
+   - Fixes [#1](https://github.com/LabodiDavid/SimplifyTools/issues/1)
  - 1.1.0
    - Updated to 1.18.2
    - Minor changes

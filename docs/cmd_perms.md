@@ -1,8 +1,9 @@
-## SimplifyTools Commands
+## SimplifyTools - Commands
 You can use the following commands to use the features of SimplifyTools.
 - **/st**: The main SimplifyTools command.<br />Requires `st.st`
 - **/st help**: Displays all SimplifyTools related commands.<br />Requires `st.help`
 - **/st ping**: Displays your ping to the current server.<br />Requires `st.ping`
+- **/st tps**: Displays plugin calculated TPS.<br />Requires `st.tps`
 - **/st stats**: Displays your gameplay statistics.<br />Requires `st.stats`
 - **/st save-all**: Saves the players, worlds data on the server.<br />Requires `st.save`
 - **/st pmanager** <LOAD/UNLOAD>: A built-in plugin manager.<br />Requires `st.pmanager.*`
@@ -10,7 +11,7 @@ You can use the following commands to use the features of SimplifyTools.
 - **/st pmanager unload** <PLUGIN-NAME>: Plugin unload.<br />Requires `st.pmanager.unload  (can be inherited from st.pmanager.*)`
 - **/st reload**: Plugin settings reload.<br />Requires `st.reload`
 
-## SimplifyTools Wildcard Permissions
+## SimplifyTools - Wildcard Permissions
 
 - **st.*** -  Wildcard permission for all commands, permissions for this plugin.
 - **st.pmanager.*** - Wildcard permission for the plugin manager commands.

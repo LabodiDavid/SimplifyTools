@@ -1,4 +1,4 @@
-package tk.ditservices.utils;
+package hu.ditservices.utils;
 
 import java.io.IOException;
 

@@ -1,12 +1,12 @@
-package tk.ditservices.utils;
+package hu.ditservices.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import java.lang.Math;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class Server {
+
+
     public enum RAM {
         FREE,USED,TOTAL
     }
@@ -17,7 +17,6 @@ public class Server {
     public static long getRAM(Server.RAM t) {
         long mb = 1048576L;
         Runtime runtime = Runtime.getRuntime();
-        runtime.gc();
         if (t == RAM.FREE){
             return runtime.freeMemory() / mb;
         }
@@ -31,15 +30,26 @@ public class Server {
         return 0;
     }
     /**
+     * Get the CPU cores of the MC server.
+     */
+    public static int getCpuCores(){
+        return Runtime.getRuntime().availableProcessors();
+    }
+
+
+    /**
      * Get a player's ping.
      * @param player The player object.
+     * @return Returns the player's ping in integer.
      */
     public static int getPlayerPing(Player player){
         try {
-            //Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
-            //return (int) entityPlayer.getClass().getField("ping").get(entityPlayer);
+            if (Version.ServerVersion.isCurrentLower(Version.ServerVersion.v1_16_R1)){
+                Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
+                return (int) entityPlayer.getClass().getField("ping").get(entityPlayer);
+            }
             return player.getPing();
-        } catch (IllegalArgumentException | SecurityException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
@@ -54,7 +64,7 @@ public class Server {
         if (Bukkit.getOnlinePlayers().size() !=0){
             onlineplayers =Bukkit.getOnlinePlayers().size();
             for (Player player : Bukkit.getOnlinePlayers()){
-                sum += player.getPing();
+                sum += Server.getPlayerPing(player);
             }
             avg = Math.floorDiv(sum,onlineplayers);
 
