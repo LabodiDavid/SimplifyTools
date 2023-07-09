@@ -261,7 +261,7 @@ public class TabHandler {
             msg = msg.replace("{MOTD}", plugin.getServer().getMotd()); //LegacyComponentSerializer.legacyAmpersand().serialize(plugin.getServer().motd().asComponent())
         }
         if (msg.contains("{TPS}")){
-            msg = msg.replace("{TPS}",String.format("%.2f", TPS.getTPS()));
+            msg = msg.replace("{TPS}",String.valueOf(java.lang.Math.round(TPS.getTPS())));
         }
         return ChatColor.translateAlternateColorCodes('&',msg);
     }

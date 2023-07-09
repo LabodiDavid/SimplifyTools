@@ -1,7 +1,12 @@
 # SimplifyTools  
 ### An 'All-in-one' plugin for MC servers. 
 #### TabList Customizing, Custom Advancement, Connect messages, AutoSave, Logger
- [![Build Status](https://ci.ditservices.hu/job/SimplifyTools/badge/icon)](https://ci.ditservices.hu/job/SimplifyTools/) ![ MC Version](https://ci.ditservices.hu/job/SimplifyTools/badge/icon?subject=MC&status=1.12%20-%201.19.3&color=darkblue)  ![Git latest release](https://img.shields.io/github/v/release/LabodiDavid/SimplifyTools)  [![bStats](https://ci.ditservices.hu/job/SimplifyTools/badge/icon?subject=bStats&status=3.0&color=brightgreen)](https://bstats.org/plugin/bukkit/SimplifyTools/15108) ![ Lines of code](https://tokei.rs/b1/github/LabodiDavid/SimplifyTools?category=code)
+ [![Build Status](https://ci.ditservices.hu/job/SimplifyTools/badge/icon)](https://ci.ditservices.hu/job/SimplifyTools/) ![ MC Version](https://ci.ditservices.hu/job/SimplifyTools/badge/icon?subject=MC&status=1.12%20-%201.20.1&color=darkblue)  ![Git latest release](https://img.shields.io/github/v/release/LabodiDavid/SimplifyTools)  [![bStats](https://ci.ditservices.hu/job/SimplifyTools/badge/icon?subject=bStats&status=3.0&color=brightgreen)](https://bstats.org/plugin/bukkit/SimplifyTools/15108) ![Lines of code](https://tokei.rs/b1/github/LabodiDavid/SimplifyTools?category=code)
+<br>[Changelog](docs/ChangeLog.md)
+<hr>
+
+
+
 ## Features
 
  - **Tab Manager** - Allows you to specify colored texts, with animations on the tab window.
@@ -10,7 +15,7 @@
  - **Automatic/command saving** - Allows you to schedule auto saving of the world/player data on your server, or you can initiate a save by a command.
  - **Custom Connect/Disconnect messages** - Allows you to customize the message that is broadcasted when someone joins or leaves the server.
   ![Connect messages preview](docs/img/2.gif)
- - **Plugin Manager** - Allows you to unload/load plugins without a server restart.
+ - **Plugin Manager** - Allows you to unload/load plugins without a server restart. (Disabled by default since v1.2.1)
  - **Gameplay statistics** - You can check your gameplay statistics such as player/mob kills, etc.
  (Note: The plugin just shows the stats not recording itself, so stats before installing this plugin are counted too.)
   ![Stats preview](docs/img/3.gif)

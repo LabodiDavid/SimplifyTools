@@ -87,13 +87,18 @@ public class DitCmd implements CommandExecutor {
                             sender.sendMessage(plugin.getPrefix()+ChatColor.DARK_RED+"Invalid arguments!");
                             return true;
                         }
-                        if (args[1].equalsIgnoreCase("load")) {
-                            //PluginCmd.handleLoad(sender,args);
-                            PluginCmd.LoadPlugin(sender,args);
-                        }
-                        if (args[1].equalsIgnoreCase("unload")) {
-                            //PluginCmd.handleUnload(sender,args);
-                            PluginCmd.UnloadPlugin(sender, args);
+                        if (config.getBoolean("PluginManager.enabled")) {
+                            if (args[1].equalsIgnoreCase("load")) {
+                                //PluginCmd.handleLoad(sender,args);
+                                PluginCmd.LoadPlugin(sender,args);
+                            }
+                            if (args[1].equalsIgnoreCase("unload")) {
+                                //PluginCmd.handleUnload(sender,args);
+                                PluginCmd.UnloadPlugin(sender, args);
+                            }
+                        } else {
+                            sender.sendMessage(plugin.getPrefix()+ChatColor.DARK_RED+"Plugin manager commands are disabled in the config!");
+                            return true;
                         }
                     }
                 }
@@ -101,7 +106,7 @@ public class DitCmd implements CommandExecutor {
 
                 if (command.getName().equalsIgnoreCase("st") && args[0].contains("save-all") && sender.hasPermission("st.save")){
                     this.addToCoolDown(sender);
-                    return SaveCmd.Run(sender);
+                    return SaveCmd.Run();
                 }
 
                 if (command.getName().equalsIgnoreCase("st") && args[0].contains("ping") &&  sender.hasPermission("st.ping")){

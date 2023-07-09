@@ -3,10 +3,14 @@ package hu.ditservices.commands;
 import hu.ditservices.STPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.command.CommandSender;
 
 public class SaveCmd {
-    public static boolean Run(CommandSender sender){
+    /**
+     * Saves all worlds and players data.
+     *
+     * @return boolean
+     */
+    public static boolean Run(){
         STPlugin plugin = STPlugin.getInstance();
         String p = plugin.config.getString("Saving.broadcastMsgProgress").replace("{PREFIX}",plugin.getPrefix());
         String d = plugin.config.getString("Saving.broadcastMsgDone").replace("{PREFIX}",plugin.getPrefix());

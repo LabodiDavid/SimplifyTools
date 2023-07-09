@@ -14,10 +14,12 @@ import hu.ditservices.utils.AdvancementHelper;
 public class ChatEvents implements Listener {
     private STPlugin plugin;
     private FileConfiguration config;
+
     public ChatEvents(STPlugin instance){
         this.plugin = instance;
         this.config = plugin.config;
     }
+
     @EventHandler(priority = EventPriority.MONITOR)
     public void onAdvance(PlayerAdvancementDoneEvent e){
         if (config.isSet("CustomAdvancement.enabled") && config.getBoolean("CustomAdvancement.enabled")){

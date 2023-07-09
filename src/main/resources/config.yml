@@ -80,6 +80,12 @@ Cooldown:
   # The time must be passed between using this plugin commands.
   seconds: 2 #The command cooldown in seconds
   Msg: '{PREFIX} Please wait {SECONDS} seconds!' # The message when the user spamming a command
-
+#
+# Plugin Manager - Enable/Disable plugins without server restart
+# Attention! It may cause errors in other plugins if you use this feature, not recommended!
+# If this is set to 'true' you can use the /st pmanager commands. Set it to 'false' to prevent its use.
+#
+PluginManager:
+  enabled: false
 # Miscellaneous
-Prefix: '&a[&fSimplify&7Tools&2] &4- &f'
+Prefix: '&a[&fSimplify&7Tools&2] &4- &f'  # The prefix which is inserted to the beginning of every plugin message.

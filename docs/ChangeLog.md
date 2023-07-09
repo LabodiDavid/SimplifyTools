@@ -1,4 +1,11 @@
 # SimplifyTools - Changelog
+
+- 1.2.1
+   - Added support for version up to 1.20.1
+   - Plugin manager added setting, now disabled by default in the config.
+   - Removed coloring of the logs in the server console
+   - TPS number displayed in the TAB now rounded to the nearest integer.
+   - Minor code refactors
  - 1.2.0
    - Added TPS command `/st tps` 
    - Added `{MOTD}`, `{TPS}` variable for TAB customization in the config 

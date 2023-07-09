@@ -49,15 +49,14 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
             this.setEnabled(false);
             return;
         }
-        //this.dplug = new DitPluginManager(this);
-        this.log.info(this.getPrefix()+"Started running.");
+        this.log.info(ChatColor.stripColor(this.getPrefix())+"Started running.");
     }
 
 
     private void Init() throws Exception {
         this.ServerStartTime = ManagementFactory.getRuntimeMXBean().getStartTime();
         if (Version.ServerVersion.isCurrentLower(Version.ServerVersion.v1_12_R1)){
-            throw new Exception("The server version is not supported! Update to a version between 1.12 - 1.19.3 to run this plugin.");
+            throw new Exception("The server version is not supported! Update to a version between 1.12 - 1.20.1 to run this plugin.");
         }
         if (this.Reload()){
 
@@ -73,7 +72,7 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
             getServer().getPluginManager().registerEvents(new LogConnect(this), this);
             if (this.config.isSet("CustomAdvancement.enabled") && this.config.getBoolean("CustomAdvancement.enabled")){
                 getServer().getPluginManager().registerEvents(new ChatEvents(this), this);
-                this.log.info(this.getPrefix()+"Custom Advancement Messages enabled!");
+                this.log.info(ChatColor.stripColor(this.getPrefix()) + "Custom Advancement Messages enabled!");
             }
             Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new TPS(), 0, 1);
 
@@ -154,6 +153,6 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
     }
     @Override
     public void onDisable() {
-        System.out.println(this.getPrefix()+" stopped.");
+        this.log.info(ChatColor.stripColor(this.getPrefix()) + "Started running.");
     }
 }
