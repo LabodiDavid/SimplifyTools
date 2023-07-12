@@ -1,10 +1,10 @@
 package hu.ditservices.handlers;
 
-import hu.ditservices.commands.SaveCmd;
+import hu.ditservices.commands.SaveCommand;
 
 public class SaveHandler implements Runnable{
     @Override
     public void run() {
-        SaveCmd.Run();
+        SaveCommand.Run();
     }
 }

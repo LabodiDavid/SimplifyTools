@@ -6,7 +6,7 @@ import org.bukkit.Statistic;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class StatCmd {
+public class StatCommand {
     public static boolean Run(CommandSender sender){
         Player player = (Player) sender;
 

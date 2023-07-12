@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-public class PingCmd {
+public class PingCommand {
     public static boolean Run(CommandSender sender) {
         STPlugin plugin = STPlugin.getInstance();
         if (sender instanceof Player) {

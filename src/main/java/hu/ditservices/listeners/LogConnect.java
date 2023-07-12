@@ -20,9 +20,9 @@ public class LogConnect implements Listener {
     public LogConnect(STPlugin instance){
         this.plugin = instance;
         this.config = plugin.config;
-        if (config.getBoolean("CustomMsg.enabled")){
+        if (config.getBoolean("CustomMsg.enabled")) {
             this.JoinMsg = this.config.isSet("CustomMsg.connect") ? this.config.getString("CustomMsg.connect") : "{PREFIX}{NAME} &aconnected to the server.";
-            this.LeaveMsg = this.config.isSet("CustomMsg.connect") ? this.config.getString("CustomMsg.disconnect") : "{PREFIX}{NAME} leaved the game.";
+            this.LeaveMsg = this.config.isSet("CustomMsg.connect") ? this.config.getString("CustomMsg.disconnect") : "{PREFIX}{NAME} left the game.";
         }
 
     }

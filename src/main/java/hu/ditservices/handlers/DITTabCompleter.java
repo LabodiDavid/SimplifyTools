@@ -44,38 +44,38 @@ public class DITTabCompleter implements TabCompleter {
                 return result;
             }
             if (args.length >= 2) {
-                        for (String a : arguments) {
-                                vizsg_2 = false;
-                                if (a.contains(" ")){
-                                    vizsg_list = Arrays.asList(a.split(" "));
-                                    vizsg_2 = true;
-                                }
-                                if (vizsg_2 && args.length ==2){ // length-1
-                                    idea.add(vizsg_list.get(1));
-                                }
-                                if (vizsg_2&& args[1].startsWith(vizsg_list.get(1))) {
-                                    idea.add(vizsg_list.get(1));
-                                }
-                        }
+                for (String a : arguments) {
+                    vizsg_2 = false;
+                    if (a.contains(" ")){
+                        vizsg_list = Arrays.asList(a.split(" "));
+                        vizsg_2 = true;
+                    }
+                    if (vizsg_2 && args.length ==2){ // length-1
+                        idea.add(vizsg_list.get(1));
+                    }
+                    if (vizsg_2&& args[1].startsWith(vizsg_list.get(1))) {
+                        idea.add(vizsg_list.get(1));
+                    }
+                }
 
-                    if (args[0].equalsIgnoreCase("pmanager")&& args[1].equalsIgnoreCase("unload") || args[1].equalsIgnoreCase("load")) {
-                        if (args.length == 3) {
-                            result.clear();
-                            PluginManager pm = Bukkit.getServer().getPluginManager();
-                            for (Plugin pl : pm.getPlugins()) {
-                                if (pl.getName().toLowerCase().startsWith(args[2].toLowerCase()) && args[1].equalsIgnoreCase("unload")) {
+                if (args[0].equalsIgnoreCase("pmanager")&& args[1].equalsIgnoreCase("unload") || args[1].equalsIgnoreCase("load")) {
+                    if (args.length == 3) {
+                        result.clear();
+                        PluginManager pm = Bukkit.getServer().getPluginManager();
+                        for (Plugin pl : pm.getPlugins()) {
+                            if (pl.getName().toLowerCase().startsWith(args[2].toLowerCase()) && args[1].equalsIgnoreCase("unload")) {
+                                result.add(pl.getName());
+                            }
+                            if (!pl.isEnabled()){
+                                if (pl.getName().toLowerCase().startsWith(args[2].toLowerCase()) && args[1].equalsIgnoreCase("load")) {
                                     result.add(pl.getName());
                                 }
-                                if (!pl.isEnabled()){
-                                    if (pl.getName().toLowerCase().startsWith(args[2].toLowerCase()) && args[1].equalsIgnoreCase("load")) {
-                                        result.add(pl.getName());
-                                    }
-                                }
                             }
-                            return result;
                         }
+                        return result;
                     }
-                        return idea;
+                }
+                return idea;
             }
         }
         return null;

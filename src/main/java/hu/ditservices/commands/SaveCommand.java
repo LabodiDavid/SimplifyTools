@@ -4,7 +4,7 @@ import hu.ditservices.STPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
-public class SaveCmd {
+public class SaveCommand {
     /**
      * Saves all worlds and players data.
      *

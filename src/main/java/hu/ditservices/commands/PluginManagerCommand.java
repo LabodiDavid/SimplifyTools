@@ -7,7 +7,7 @@ import hu.ditservices.STPlugin;
 import org.bukkit.command.CommandSender;
 
 
-public class PluginCmd {
+public class PluginManagerCommand {
     public static boolean LoadPlugin(CommandSender sender, String[] args){
         Plugin plugin = Bukkit.getPluginManager().getPlugin(args[2]);
         if (plugin == null) {
