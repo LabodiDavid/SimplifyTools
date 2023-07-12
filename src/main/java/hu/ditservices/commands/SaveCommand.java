@@ -12,8 +12,8 @@ public class SaveCommand {
      */
     public static boolean Run(){
         STPlugin plugin = STPlugin.getInstance();
-        String p = plugin.config.getString("Saving.broadcastMsgProgress").replace("{PREFIX}",plugin.getPrefix());
-        String d = plugin.config.getString("Saving.broadcastMsgDone").replace("{PREFIX}",plugin.getPrefix());
+        String p = plugin.getConfig().getString("Saving.broadcastMsgProgress").replace("{PREFIX}",plugin.getPrefix());
+        String d = plugin.getConfig().getString("Saving.broadcastMsgDone").replace("{PREFIX}",plugin.getPrefix());
         Bukkit.broadcast(p,"st.st");
         for(World w : Bukkit.getServer().getWorlds()){
             w.save();

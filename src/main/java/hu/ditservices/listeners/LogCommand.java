@@ -16,7 +16,7 @@ public class LogCommand implements Listener {
     public LogCommand(STPlugin instance){
 
         this.plugin = instance;
-        this.config = plugin.config;
+        this.config = plugin.getConfig();
     }
     @EventHandler(priority = EventPriority.MONITOR)
     public void onCommand(PlayerCommandPreprocessEvent event){

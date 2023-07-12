@@ -34,7 +34,7 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
     private static STPlugin instance;
     private final Logger log = Bukkit.getLogger();
 
-    public FileConfiguration config = getConfig();
+    private FileConfiguration config;
 
     public long ServerStartTime;
 
@@ -45,6 +45,16 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
         if (this.initPlugin()) {
             this.log.info(ChatColor.stripColor(this.getPrefix())+"Started running.");
         }
+    }
+
+    @Override
+    public FileConfiguration getConfig() {
+        //TODO Implement defaults everywhere when config is not loaded for some reasons
+        if (this.config != null) {
+            return this.config;
+        }
+
+        return super.getConfig();
     }
 
 
@@ -94,7 +104,7 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
                 throw new Exception("The server version is not supported! Update to a version between 1.12 - 1.20.1 to run this plugin.");
             }
 
-            if (this.Reload()) {
+            if (this.reload()) {
                 TabHandler tab = new TabHandler();
 
                 PluginCommand stCommand = this.getCommand("st");
@@ -170,7 +180,7 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
         return returnText.toString();
     }
 
-    public boolean Reload(){
+    public boolean reload(){
         File configFile = new File(getDataFolder(), "config.yml");
 
         try {

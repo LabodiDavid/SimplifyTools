@@ -17,7 +17,7 @@ public class ChatEvents implements Listener {
 
     public ChatEvents(STPlugin instance){
         this.plugin = instance;
-        this.config = plugin.config;
+        this.config = plugin.getConfig();
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

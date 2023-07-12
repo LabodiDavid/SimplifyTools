@@ -1,9 +1,6 @@
 package hu.ditservices.handlers;
 
-import hu.ditservices.commands.PingCommand;
-import hu.ditservices.commands.PluginManagerCommand;
-import hu.ditservices.commands.SaveCommand;
-import hu.ditservices.commands.StatCommand;
+import hu.ditservices.commands.*;
 import hu.ditservices.utils.TPS;
 import hu.ditservices.STPlugin;
 import hu.ditservices.utils.Cooldown;
@@ -21,13 +18,13 @@ public class CommandHandler implements CommandExecutor {
 
     public CommandHandler(final STPlugin instance) {
         this.plugin = instance;
-        this.noArgMsg = plugin.getPrefix()+ ChatColor.DARK_RED + "To list all SimplifyTools commands use the '/help SIMPLIFYTOOLS' command!";
+        this.noArgMsg = plugin.getPrefix() + ChatColor.DARK_RED + "To list all SimplifyTools commands use the '/help SIMPLIFYTOOLS' command!";
         this.cd = new Cooldown(plugin);
-        this.config = plugin.config;
+        this.config = plugin.getConfig();
     }
 
     public boolean addToCoolDown(CommandSender sender) {
-        if (sender instanceof Player){
+        if (sender instanceof Player) {
             Player p = (Player) sender;
             this.cd.Add(p);
             return true;
@@ -45,49 +42,37 @@ public class CommandHandler implements CommandExecutor {
                     this.addToCoolDown(sender);
                 }
 
-                if (command.getName().equals("st") && args.length==0)
+                if (command.getName().equals("st") && (args.length == 0 || args[0].contains("help")))
                 {
-                    sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Version: "+plugin.getDescription().getVersion());
+                    sender.sendMessage(plugin.getPrefix() + ChatColor.GREEN+"Version: " + plugin.getDescription().getVersion());
                     sender.sendMessage(this.noArgMsg);
                     return true;
                 }
-                if (command.getName().equals("st") && args[0].contains("help"))
-                {
-                    sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Version: "+plugin.getDescription().getVersion());
-                    sender.sendMessage(this.noArgMsg);
-                    return true;
-                }
+
                 if (command.getName().equals("st") && args[0].contains("settings"))
                 {
-                        sender.sendMessage(plugin.getPrefix()+ ChatColor.GREEN+" === Plugin Information === ");
-                        sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Plugin Version: "+plugin.getDescription().getVersion());
-                        sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Server Version: "+ Version.ServerVersion.getCurrent().toString());
-                        sender.sendMessage(ChatColor.GREEN+" -------- Features -------- ");
-                        sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Tab customization: "+(config.getBoolean("Tab.enabled") ? ChatColor.GREEN+"Enabled" : ChatColor.RED+"Disabled"));
-                        sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Custom Advancement Msg: "+(config.getBoolean("CustomAdvancement.enabled") ? ChatColor.GREEN+"Enabled" : ChatColor.RED+"Disabled"));
-                        sender.sendMessage(ChatColor.GREEN+" ========================== ");
-                        return true;
+                        return SettingsCommand.Run(sender);
                 }
 
                 if (command.getName().equals("st") && args[0].contains("reload") && sender.hasPermission("st.reload")){
 
-                    if(plugin.Reload()){
-                        sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Successfully reload!");
-                        sender.sendMessage(plugin.getPrefix()+ChatColor.RED+"Notice: Restart your server if the settings didn't applied.");
+                    if(plugin.reload()){
+                        sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Successfully reload!" + "\n"
+                        + plugin.getPrefix() + ChatColor.RED + "Notice: Restart your server if the settings didn't applied.");
                         return true;
                     }
                 }
 
-                if (command.getName().equals("st") && args[0].contains("tps") && sender.hasPermission("st.tps")){
-                        sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Plugin Calculated TPS: "+TPS.getColor()+String.format("%.2f", TPS.getTPS()));
+                if (command.getName().equals("st") && args[0].contains("tps") && sender.hasPermission("st.tps")) {
+                        sender.sendMessage(plugin.getPrefix() + ChatColor.GREEN+"Plugin Calculated TPS: "+TPS.getColor()+String.format("%.2f", TPS.getTPS()));
                         return true;
 
                 }
 
-                if (command.getName().equalsIgnoreCase("st") && args[0].contains("pmanager")){
+                if (command.getName().equalsIgnoreCase("st") && args[0].contains("pmanager")) {
                     if (sender.hasPermission("st.pmanager.unload") || sender.hasPermission("st.pmanager.load") || sender.hasPermission("st.pmanager")) {
                         if (args.length==1){
-                            sender.sendMessage(plugin.getPrefix()+ChatColor.DARK_RED+"Invalid arguments!");
+                            sender.sendMessage(plugin.getPrefix() + ChatColor.DARK_RED+"Invalid arguments!");
                             return true;
                         }
                         if (config.getBoolean("PluginManager.enabled")) {
@@ -100,21 +85,21 @@ public class CommandHandler implements CommandExecutor {
                                 PluginManagerCommand.UnloadPlugin(sender, args);
                             }
                         } else {
-                            sender.sendMessage(plugin.getPrefix()+ChatColor.DARK_RED+"Plugin manager commands are disabled in the config!");
+                            sender.sendMessage(plugin.getPrefix() + ChatColor.DARK_RED + "Plugin manager commands are disabled in the config!");
                             return true;
                         }
                     }
                 }
 
 
-                if (command.getName().equalsIgnoreCase("st") && args[0].contains("save-all") && sender.hasPermission("st.save")){
+                if (command.getName().equalsIgnoreCase("st") && args[0].contains("save-all") && sender.hasPermission("st.save")) {
                     return SaveCommand.Run();
                 }
 
-                if (command.getName().equalsIgnoreCase("st") && args[0].contains("ping") &&  sender.hasPermission("st.ping")){
+                if (command.getName().equalsIgnoreCase("st") && args[0].contains("ping") &&  sender.hasPermission("st.ping")) {
                     return PingCommand.Run(sender);
                 }
-                if (command.getName().equalsIgnoreCase("st") && args[0].contains("stats") && sender.hasPermission("st.stats")){
+                if (command.getName().equalsIgnoreCase("st") && args[0].contains("stats") && sender.hasPermission("st.stats")) {
                     return StatCommand.Run(sender);
                 }
             }else{

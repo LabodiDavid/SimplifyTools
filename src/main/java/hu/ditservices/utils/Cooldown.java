@@ -19,7 +19,7 @@ public class Cooldown {
 
     public Cooldown(STPlugin instance){
         this.plugin = instance;
-        this.config = plugin.config;
+        this.config = plugin.getConfig();
         if (config.isSet("Cooldown.seconds")){
             int cd = this.delay;
             if (cd!=config.getInt("Cooldown.seconds")){
