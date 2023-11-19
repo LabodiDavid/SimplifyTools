@@ -1,5 +1,6 @@
 # SimplifyTools - Changelog
-
+- 1.2.2
+   - Added support for version up to 1.20.2
 - 1.2.1
    - Added support for version up to 1.20.1
    - Plugin manager added setting, now disabled by default in the config.
