@@ -28,7 +28,16 @@ public class Version {
         v1_19_R1,
         v1_19_R2,
         v1_20_R1,
-        v1_20_R2;
+        v1_20_R2,
+        v1_20_3_R1,
+        v1_20_4_R1,
+        v1_20_5_R1,
+        v1_20_6_R1,
+        v1_21_R1,
+        v1_21_1_R1,
+        v1_21_2_R1,
+        v1_21_3_R1,
+        v1_21_4_R1;
 
         private int value;
 
@@ -59,9 +68,31 @@ public class Version {
             return current;
         }
 
-        public static String[] getArrayVersion() {
+        /*public static String[] getArrayVersion() {
             if (arrayVersion == null) {
                 arrayVersion = org.bukkit.Bukkit.getServer().getClass().getPackage().getName().split("\\.");
+            }
+
+            return arrayVersion;
+        }*/
+        public static String[] getArrayVersion() {
+            if (arrayVersion == null) {
+                String packageName = org.bukkit.Bukkit.getServer().getClass().getPackage().getName();
+                String[] splitPackageName = packageName.split("\\.");
+
+                // Check if the splitPackageName length is more than 3
+                if (splitPackageName.length > 3) {
+                    arrayVersion = new String[] {splitPackageName[3]};
+                } else {
+                    // Handle the case for newer versions
+                    String version = "UNKNOWN";
+                    try {
+                        version = org.bukkit.Bukkit.getServer().getVersion().split("\\(MC: ")[1].split("\\)")[0];
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    arrayVersion = new String[] {"v" + version.replace('.', '_') + "_R1"};
+                }
             }
 
             return arrayVersion;
