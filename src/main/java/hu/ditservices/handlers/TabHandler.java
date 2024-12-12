@@ -1,5 +1,9 @@
 package hu.ditservices.handlers;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import hu.ditservices.STPlugin;
 import hu.ditservices.utils.*;
 import hu.ditservices.utils.Math;
@@ -16,6 +20,9 @@ public class TabHandler {
     public final List<String> headers = new ArrayList<>();
     public final List<String> footers = new ArrayList<>();
 
+    public final List<WrappedChatComponent> headerComponents = new ArrayList<>();
+    public final List<WrappedChatComponent> footerComponents = new ArrayList<>();
+
     private Integer refreshRate;
 
     private final STPlugin plugin;
@@ -30,11 +37,15 @@ public class TabHandler {
     private int count2 = 0; //footers
     private Object packet;
 
+    private boolean isNewerThan1_20_2;
+
     public TabHandler() throws Exception {
 
         this.plugin = STPlugin.getInstance();
+        this.isNewerThan1_20_2 = Version.ServerVersion.isCurrentHigher(Version.ServerVersion.v1_20_R2);
         if(this.init()){
-            if (headers.isEmpty() && footers.isEmpty()){
+            if ((headers.isEmpty() && footers.isEmpty() && !isNewerThan1_20_2)
+                    || (headerComponents.isEmpty() && footerComponents.isEmpty() && isNewerThan1_20_2)){
                 plugin.getLogger().warning(plugin.getPrefix()+"TAB customization disabled because empty customization config!");
                 return;
             }
@@ -110,71 +121,68 @@ public class TabHandler {
     private void updateTab(){
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
             try {
-                if (Bukkit.getOnlinePlayers().size()==0){
+                if (Bukkit.getOnlinePlayers().isEmpty()){
                     return;
                 }
+                if (isNewerThan1_20_2) {
+                    if (count1 >= headerComponents.size()) {
+                        count1 = 0;
+                    }
+                    if (count2 >= footerComponents.size()) {
+                        count2 = 0;
+                    }
+                } else {
+                    if (count1 >= headers.size()) {
+                        count1 = 0;
+                    }
+                    if (count2 >= footers.size()) {
+                        count2 = 0;
+                    }
+                }
 
-                if (count1 >= headers.size()) {
-                    count1 = 0;
-                }
-                if (count2 >= footers.size()) {
-                    count2 = 0;
-                }
                 //Re adding all lines  where we replaced something like the RAM usage to every refresh
                 //display current value. (We check those lines in the init())
-                if (DynamicHeaders.size() > 0 && count1 < DynamicHeaders.size()) {
+                if (!DynamicHeaders.isEmpty() && count1 < DynamicHeaders.size()) {
                     if (DynamicHeaders.get(count1) == count1) {
                         addHeaderFooter(true, headeranimList.get(count1), true, count1);
                     }
                 }
-                if (DynamicFooters.size() > 0 && count2 < DynamicFooters.size()) {
+                if (!DynamicFooters.isEmpty() && count2 < DynamicFooters.size()) {
                     if (DynamicFooters.get(count2) == count2) {
                         addHeaderFooter(false, footeranimList.get(count2), true, count2);
                     }
                 }
-                /*
-                if (both){
-                        plugin.getLogger().info("DEBUG: Sending both (header) JSON: "+WrappedChatComponent.fromHandle(headers.get(count1)).getJson());
-                        plugin.getLogger().info("DEBUG: Sending both (footer) JSON: "+WrappedChatComponent.fromHandle(footers.get(count2)).getJson());
-
-                        packet.getChatComponents().write(0, WrappedChatComponent.fromHandle(headers.get(count1))).write(1,WrappedChatComponent.fromHandle(footers.get(count2)));
-                    }else{
-                        if (header){
-                            plugin.getLogger().info("DEBUG: Sending header JSON: "+WrappedChatComponent.fromHandle(headers.get(count1)).getJson());
-
-                            packet.getChatComponents().write(0, WrappedChatComponent.fromHandle(headers.get(count1))).write(1,WrappedChatComponent.fromText("{\"text\":\"\"}"));
-                        }else{
-                            if (footer){
-                                plugin.getLogger().info("DEBUG: Sending footer JSON: "+WrappedChatComponent.fromHandle(footers.get(count2)).getJson());
-
-                                packet.getChatComponents().write(0,WrappedChatComponent.fromText("{\"text\":\"\"}")).write(1,WrappedChatComponent.fromHandle(footers.get(count2)));
-                            }
-                        }
-                    }
-
-                if (Bukkit.getOnlinePlayers().size() > 0) {
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        plugin.getProtocolManager().sendServerPacket(player, packet);
-                    }
-                }*/
-
 
                 if (Version.ServerVersion.isCurrentEqualOrLower(Version.ServerVersion.v1_12_R1)) {
                     packet = ClazzContainer.buildPacketPlayOutPlayerListHeaderFooter(headers.get(count1),footers.get(count2));
                     for (Player player : Bukkit.getOnlinePlayers()){
                         Reflection.sendPacket(player,packet);
                     }
-                }else{
+                } else if (Version.ServerVersion.isCurrentHigher(Version.ServerVersion.v1_20_R2)) {
+                    // Use ProtocolLib for versions higher than 1.20.2
+                    ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
+                    PacketContainer packet = protocolManager.createPacket(com.comphenix.protocol.PacketType.Play.Server.PLAYER_LIST_HEADER_FOOTER);
+
+                    // Set header and footer
+                    packet.getChatComponents().write(0, headerComponents.get(count1));
+                    packet.getChatComponents().write(1, footerComponents.get(count2));
+
+                    // Send the packet to all players
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.setPlayerListHeaderFooter(headers.get(count1),footers.get(count2));
+                        protocolManager.sendServerPacket(player, packet);
+                    }
+                } else {
+                    // Use the built-in Spigot API for versions between 1.13 and 1.20.1
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        player.setPlayerListHeaderFooter(headers.get(count1), footers.get(count2));
                     }
                 }
 
 
-                if (headers.size() > 1) {
+                if (headers.size() > 1 || headerComponents.size() > 1) {
                     count1++;
                 }
-                if (footers.size() > 1) {
+                if (footers.size() > 1 || footerComponents.size() > 1) {
                     count2++;
                 }
 
@@ -194,33 +202,42 @@ public class TabHandler {
      * @param dynamic If the text contains a replace which need to run every tab refresh then it's true.
      * @param index Index of the 'dynamic' line. This is an overloading so there we need the index[0] element.
      */
-    private void addHeaderFooter(boolean header,String text,boolean dynamic,int... index) throws Exception {
+    private void addHeaderFooter(boolean header,String text,boolean dynamic,int... index) {
         try {
-            //JsonObject json = new JsonObject();
-            //json.addProperty("text",format(text));
             String Json = "{\"text\": \""+format(text)+"\"}";
-            //String Json = format(text);
-            //Json = Json.trim();
-            //plugin.getLogger().info("JSON!: "+Json);
-            Object tabText = Reflection.asChatSerializer(Json);
+            boolean isNewerThan1202 = Version.ServerVersion.isCurrentHigher(Version.ServerVersion.v1_20_R2);
 
-            //plugin.getLogger().info("DEBUG: Adding JSON: "+Json);
-            if (header){
-                if (dynamic){
+            if (isNewerThan1202) {
+                WrappedChatComponent tabText = WrappedChatComponent.fromJson(Json);
 
-                    headers.set(index[0], Reflection.getChatSerializerString(tabText));
-                    //headers.set(index[0],Json);
-                }else {
-                    //headers.add(Json);
-                    headers.add(Reflection.getChatSerializerString(tabText));
+                if (header){
+                    if (dynamic){
+                        headerComponents.set(index[0], tabText);
+                    }else {
+                        headerComponents.add(tabText);
+                    }
+                }else{
+                    if (dynamic){
+                        footerComponents.set(index[0], tabText);
+                    }else {
+                        footerComponents.add(tabText);
+                    }
                 }
-            }else{
-                if (dynamic){
-                    //footers.set(index[0],Json);
-                    footers.set(index[0], Reflection.getChatSerializerString(tabText));
-                }else {
-                    //footers.add(Json);
-                    footers.add(Reflection.getChatSerializerString(tabText));
+            } else {
+                Object tabText = Reflection.asChatSerializer(Json);
+
+                if (header){
+                    if (dynamic){
+                        headers.set(index[0], Reflection.getChatSerializerString(tabText));
+                    }else {
+                        headers.add(Reflection.getChatSerializerString(tabText));
+                    }
+                }else{
+                    if (dynamic){
+                        footers.set(index[0], Reflection.getChatSerializerString(tabText));
+                    }else {
+                        footers.add(Reflection.getChatSerializerString(tabText));
+                    }
                 }
             }
         } catch (Exception e){

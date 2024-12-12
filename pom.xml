@@ -6,7 +6,7 @@
 
     <groupId>hu.ditservices</groupId>
     <artifactId>SimplifyTools</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <packaging>jar</packaging>
 
     <name>SimplifyTools</name>
@@ -126,14 +126,15 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.20.2-R0.1-SNAPSHOT</version>
+            <version>1.21.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <!-- from downloaded craftbukkit-x.xx.x.jar\META-INF\versions\ -->
-
-
-
-
-
+        <dependency>
+            <groupId>com.comphenix.protocol</groupId>
+            <artifactId>ProtocolLib</artifactId>
+            <version>5.1.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
