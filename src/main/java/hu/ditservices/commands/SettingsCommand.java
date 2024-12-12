@@ -15,6 +15,8 @@ public class SettingsCommand {
                 + ChatColor.GREEN+" -------- Features -------- " + "\n"
                 + ChatColor.GREEN+"Tab customization: "+(plugin.getConfig().getBoolean("Tab.enabled") ? ChatColor.GREEN + "Enabled" : ChatColor.RED+"Disabled") + "\n"
                 + ChatColor.GREEN+"Custom Advancement Msg: " + (plugin.getConfig().getBoolean("CustomAdvancement.enabled") ? ChatColor.GREEN+"Enabled" : ChatColor.RED+"Disabled") + "\n"
+                + ChatColor.GREEN+"Auto saving: " + (plugin.getConfig().getBoolean("Saving.enabled") ? ChatColor.GREEN+"Enabled" : ChatColor.RED+"Disabled") + "\n"
+                + ChatColor.GREEN+"Plugin manager: " + (plugin.getConfig().getBoolean("PluginManager.enabled") ? ChatColor.GREEN+"Enabled" : ChatColor.RED+"Disabled") + "\n"
                 + ChatColor.GREEN+" ========================== "
         );
 
