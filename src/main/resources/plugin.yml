@@ -7,7 +7,7 @@ load: POSTWORLD
 description: SimplifyTools - An All-in-one helper plugin.
 author: SimplifyDave
 website: https://ditservices.hu
-#depend: [ProtocolLib]
+depend: [ ProtocolLib ]
 commands:
   st:
     description: The default command for the plugin.

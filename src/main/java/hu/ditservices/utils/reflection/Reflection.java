@@ -1,3 +1,4 @@
+/*
 package hu.ditservices.utils.reflection;
 
 import hu.ditservices.utils.Version;
@@ -100,7 +101,8 @@ public class Reflection {
         //return ClazzContainer.getIChatBaseComponent().cast(chatSerializerMethodA.invoke(chatSerializer, json));
     }
 
-    /*public static Class<?> getNMSClassRegex(String nmsClass) {
+    */
+/*public static Class<?> getNMSClassRegex(String nmsClass) {
 
         String version = null;
         Pattern pat = Pattern.compile("net\\.minecraft\\.(?:server)?\\.(v(?:\\d_)+R\\d)");
@@ -118,5 +120,7 @@ public class Reflection {
             return null;
         }
 
-    }*/
+    }*//*
+
 }
+*/

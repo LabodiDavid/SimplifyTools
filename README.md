@@ -1,7 +1,7 @@
-# SimplifyTools  
+![SimplifyTools logo](docs/img/SimplifyTools.png)
 ### An 'All-in-one' plugin for MC servers. 
 #### TabList Customizing, Custom Advancement, Connect messages, AutoSave, Logger
- [![Build Status](https://ci.ditservices.hu/job/SimplifyTools/badge/icon)](https://ci.ditservices.hu/job/SimplifyTools/) ![ MC Version](https://ci.ditservices.hu/job/SimplifyTools/badge/icon?subject=MC&status=1.12%20-%201.20.1&color=darkblue)  ![Git latest release](https://img.shields.io/github/v/release/LabodiDavid/SimplifyTools)  [![bStats](https://ci.ditservices.hu/job/SimplifyTools/badge/icon?subject=bStats&status=3.0&color=brightgreen)](https://bstats.org/plugin/bukkit/SimplifyTools/15108) ![Lines of code](https://tokei.rs/b1/github/LabodiDavid/SimplifyTools?category=code)
+ [![Build Status](https://ci.ditservices.hu/job/SimplifyTools/badge/icon)](https://ci.ditservices.hu/job/SimplifyTools/) ![ MC Version](https://ci.ditservices.hu/job/SimplifyTools/badge/icon?subject=MC&status=1.12%20-%201.21.4&color=darkblue)  ![Git latest release](https://img.shields.io/github/v/release/LabodiDavid/SimplifyTools)  [![bStats](https://ci.ditservices.hu/job/SimplifyTools/badge/icon?subject=bStats&status=3.0&color=brightgreen)](https://bstats.org/plugin/bukkit/SimplifyTools/15108) ![Lines of code](https://tokei.rs/b1/github/LabodiDavid/SimplifyTools?category=code)
 <br>[Changelog](docs/ChangeLog.md)
 <hr>
 
@@ -23,6 +23,11 @@
  (Note: The advancement names are currently only can be displayed in english. In future versions there will be a feature to translate to any languages.)
   ![Advancement Messages preview](docs/img/4.gif)
  - **Logging** - A logger with fully customizable format for dis/connect, chat, commands actions.
+_________________
+### Dependencies
+#### From version [v1.2.3](https://github.com/LabodiDavid/SimplifyTools/releases/tag/1.2.3) the plugin requires [ProtocolLib](https://github.com/dmulloy2/ProtocolLib/)
+_________________
+
 ### [Check the config file for more explanation and examples](https://github.com/LabodiDavid/SimplifyTools/blob/main/src/main/resources/config.yml)
 _________________
 ### [Commands & Permissions](docs/cmd_perms.md)
@@ -35,5 +40,6 @@ _________________
 My main goal is to create a single plugin that has many features, so it's can replace plugins that i often use on my servers while lowering the plugins count.
 _________________
 ## 3rd party libraries used by this plugin
+### [ProtocolLib by dmulloy2](https://github.com/dmulloy2/ProtocolLib/)
 ### [Config-Updater by tchristofferson](https://github.com/tchristofferson/Config-Updater)
 ### [SpigotUpdateChecker by JEFF-Media-GbR](https://github.com/JEFF-Media-GbR/Spigot-UpdateChecker)

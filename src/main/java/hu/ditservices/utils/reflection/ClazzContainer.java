@@ -1,3 +1,4 @@
+/*
 package hu.ditservices.utils.reflection;
 
 import hu.ditservices.utils.Version;
@@ -91,3 +92,4 @@ public final class ClazzContainer {
         return packet;
     }
 }
+*/

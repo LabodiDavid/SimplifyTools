@@ -1,21 +1,29 @@
 # SimplifyTools - Changelog
 
-- 1.2.1
+- **1.2.3**
+  - Added support for version up to 1.21.4
+  - The plugin now depends on, <b>requires ProtocolLib</b> (https://github.com/dmulloy2/ProtocolLib/)
+  - Tab feature adjustments, refactor for ProtocolLib
+    - Removed Reflection (~300 lines of code)
+  - Showing more feature setting statuses in `/st settings` 
+- **1.2.2**
+  - Added support for version up to 1.20.2
+- **1.2.1**
    - Added support for version up to 1.20.1
    - Plugin manager added setting, now disabled by default in the config.
    - Removed coloring of the logs in the server console
    - TPS number displayed in the TAB now rounded to the nearest integer.
    - Minor code refactors
- - 1.2.0
+ - **1.2.0**
    - Added TPS command `/st tps` 
    - Added `{MOTD}`, `{TPS}` variable for TAB customization in the config 
    - Refactored code for multi version support (1.12 - 1.19.3)
    - Fixes [#1](https://github.com/LabodiDavid/SimplifyTools/issues/1)
- - 1.1.0
+ - **1.1.0**
    - Updated to 1.18.2
    - Minor changes
    - Temporarily reworked Plugin Manager
    - Added Update Checker (https://github.com/JEFF-Media-GbR/Spigot-UpdateChecker)
    - Implemented Metrics (bStats)
- - 1.0.0 - First Release
-     - Notice: If the /st reload command not reloading the new settings, you need to restart your MC server.
+ - **1.0.0** - First Release
+     - Notice: If the `/st reload` command not reloading the new settings, you need to restart your MC server.
