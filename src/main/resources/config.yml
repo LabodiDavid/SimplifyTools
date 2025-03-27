@@ -74,6 +74,15 @@ Saving:
   broadcastMsgProgress: '{PREFIX}Auto save in progress..'
   broadcastMsgDone: '{PREFIX}Auto save done.'
 
+# Server Password options
+# You can configure a same password for all players on the server.
+# Players not logged in can't move, cant build/destroy.
+ServerPassword:
+  enabled: false
+  password: 'changeme'
+  exceptOps: true # Server operators don't need to login.
+
+
 # Cooldown options (only applicable for this plugin!)
 Cooldown:
   enabled: true

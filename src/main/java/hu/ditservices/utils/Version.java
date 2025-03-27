@@ -37,7 +37,8 @@ public class Version {
         v1_21_1_R1,
         v1_21_2_R1,
         v1_21_3_R1,
-        v1_21_4_R1;
+        v1_21_4_R1,
+        v1_21_5_R1;
 
         private int value;
 
