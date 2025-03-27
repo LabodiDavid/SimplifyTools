@@ -1,5 +1,6 @@
 package hu.ditservices.handlers;
 
+import hu.ditservices.STPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.plugin.Plugin;
@@ -58,8 +59,12 @@ public class DITTabCompleter implements TabCompleter {
                     }
                 }
 
-                if (args[0].equalsIgnoreCase("pmanager")&& args[1].equalsIgnoreCase("unload") || args[1].equalsIgnoreCase("load")) {
-                    if (args.length == 3) {
+                if (args[0].equalsIgnoreCase("pmanager") && args[1].equalsIgnoreCase("unload") || args[1].equalsIgnoreCase("load")) {
+                    if ((args.length == 3) && STPlugin.getInstance().getConfig().getBoolean("PluginManager.enabled") &
+                            (commandSender.hasPermission("st.pmanager")
+                                    || commandSender.hasPermission("st.pmanager.load")
+                                    || commandSender.hasPermission("st.pmanager.unload"))
+                    ) {
                         result.clear();
                         PluginManager pm = Bukkit.getServer().getPluginManager();
                         for (Plugin pl : pm.getPlugins()) {
