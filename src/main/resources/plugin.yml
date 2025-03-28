@@ -53,8 +53,18 @@ commands:
     description: Plugin settings reload.
     usage: "/st reload"
     permission: st.reload
+  slogin:
+    description: Server password login.
+    usage: "/slogin <PASSWORD>"
+    permission: st.slogin
 
 permissions:
+  st.slogin:
+    description: The server password login command.
+    default: true
+  st.slogin.skip:
+    description: If has this permission the user dont have to provide server password upon connect.
+    default: op
   st.help:
     description: Enables the help command.
     default: true

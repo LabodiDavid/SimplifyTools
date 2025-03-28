@@ -81,6 +81,12 @@ ServerPassword:
   enabled: false
   password: 'changeme'
   exceptOps: true # Server operators don't need to login.
+  rememberUntilRestart: true # Set this to 'false' to player need to provide password each login.
+  # Otherwise, each player need to provide password only once until the server is restarted.
+  # Below settings are preventing the related actions until the password was not given by the player if the setting is 'true'.
+  preventInventory: true
+  preventMove: true
+  preventBuild: true
 
 
 # Cooldown options (only applicable for this plugin!)

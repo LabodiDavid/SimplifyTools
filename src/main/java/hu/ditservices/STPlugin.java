@@ -1,16 +1,10 @@
 package hu.ditservices;
 
-import hu.ditservices.handlers.DITTabCompleter;
-import hu.ditservices.handlers.SaveHandler;
-import hu.ditservices.handlers.TabHandler;
+import hu.ditservices.handlers.*;
+import hu.ditservices.listeners.*;
 import hu.ditservices.utils.*;
 import hu.ditservices.utils.Math;
 import org.bstats.bukkit.Metrics;
-import hu.ditservices.handlers.CommandHandler;
-import hu.ditservices.listeners.ChatEvents;
-import hu.ditservices.listeners.LogChat;
-import hu.ditservices.listeners.LogCommand;
-import hu.ditservices.listeners.LogConnect;
 import com.tchristofferson.configupdater.ConfigUpdater;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,8 +20,7 @@ import com.jeff_media.updatechecker.UserAgentBuilder;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Logger;
 
 public final class STPlugin extends JavaPlugin implements CommandExecutor, Listener {
@@ -37,6 +30,7 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
     private FileConfiguration config;
 
     public long ServerStartTime;
+    private ServerPasswordData serverPasswordData;
 
     @Override
     public void onEnable() {
@@ -67,6 +61,14 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
         if (this.config.isSet("CustomAdvancement.enabled") && this.config.getBoolean("CustomAdvancement.enabled")) {
             getServer().getPluginManager().registerEvents(new ChatEvents(this), this);
             this.log.info(ChatColor.stripColor(this.getPrefix()) + "Custom Advancement Messages enabled!");
+        }
+
+        if (this.config.isSet("ServerPassword.enabled") && this.config.getBoolean("ServerPassword.enabled")) {
+            this.serverPasswordData = new ServerPasswordData(this);
+            PluginCommand sloginCommand = this.getCommand("slogin");
+            sloginCommand.setExecutor(new LoginCommandHandler(this));
+            getServer().getPluginManager().registerEvents(new ServerPasswordEvents(this), this);
+            this.log.info(ChatColor.stripColor(this.getPrefix()) + "Server Password enabled!");
         }
     }
 
@@ -178,6 +180,10 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
         }
 
         return returnText.toString();
+    }
+
+    public ServerPasswordData getServerPasswordData() {
+        return this.serverPasswordData;
     }
 
     public boolean reload(){
