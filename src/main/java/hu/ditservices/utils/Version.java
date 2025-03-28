@@ -1,5 +1,8 @@
 package hu.ditservices.utils;
 
+import org.bukkit.Bukkit;
+
+import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
 public class Version {
@@ -78,6 +81,37 @@ public class Version {
         }*/
         public static String[] getArrayVersion() {
             if (arrayVersion == null) {
+                String version = null;
+                try {
+                    // Check if the Paper method getMinecraftVersion exists
+                    Method minecraftVersionMethod = Bukkit.getServer().getClass().getMethod("getMinecraftVersion");
+                    if (minecraftVersionMethod != null) {
+                        version = (String) minecraftVersionMethod.invoke(Bukkit.getServer());
+                    }
+                } catch (NoSuchMethodException e) {
+                    // The method doesn't exist in this server version; fall back below.
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // Fallback: use Bukkit version if no version was obtained or it's empty.
+                if (version == null || version.trim().isEmpty()) {
+                    version = Bukkit.getServer().getBukkitVersion();
+                    // Remove any suffix (e.g., "-R0.1-SNAPSHOT") for consistency.
+                    int dashIndex = version.indexOf('-');
+                    if (dashIndex != -1) {
+                        version = version.substring(0, dashIndex);
+                    }
+                }
+
+                // Construct a legacy-style version string.
+                String legacyVersion = "v" + version.replace('.', '_') + "_R1";
+                arrayVersion = new String[] { legacyVersion };
+            }
+            return arrayVersion;
+        }
+        /*public static String[] getArrayVersion() {
+            if (arrayVersion == null) {
                 String packageName = org.bukkit.Bukkit.getServer().getClass().getPackage().getName();
                 String[] splitPackageName = packageName.split("\\.");
 
@@ -97,7 +131,7 @@ public class Version {
             }
 
             return arrayVersion;
-        }
+        }*/
 
         public static boolean isCurrentEqualOrHigher(ServerVersion v) {
             return getCurrent().value >= v.value;
