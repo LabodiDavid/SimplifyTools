@@ -11,30 +11,30 @@ public class PluginManagerCommand {
     public static boolean LoadPlugin(CommandSender sender, String[] args){
         Plugin plugin = Bukkit.getPluginManager().getPlugin(args[2]);
         if (plugin == null) {
-            sender.sendMessage(STPlugin.getInstance().getPrefix()+"Plugin not exist!");
+            sender.sendMessage(STPlugin.getInstance().getPrefix()+ STPlugin.getInstance().getTranslatedText("pmanager.not.exist"));
             return false;
         }
         if (plugin.isEnabled()){
-            sender.sendMessage(STPlugin.getInstance().getPrefix()+"Plugin "+plugin.getName()+" already enabled!");
+            sender.sendMessage(STPlugin.getInstance().getPrefix()+"Plugin "+plugin.getName()+STPlugin.getInstance().getTranslatedText("pmanager.already.enabled"));
             return true;
         }
 
         Bukkit.getPluginManager().enablePlugin(plugin);
-        sender.sendMessage(STPlugin.getInstance().getPrefix()+"Plugin "+plugin.getName()+" successfully enabled!");
+        sender.sendMessage(STPlugin.getInstance().getPrefix()+"Plugin "+plugin.getName()+STPlugin.getInstance().getTranslatedText("pmanager.success.enabled"));
         return true;
     }
     public static boolean UnloadPlugin(CommandSender sender, String[] args){
         Plugin plugin = Bukkit.getPluginManager().getPlugin(args[2]);
         if (plugin == null) {
-            sender.sendMessage(STPlugin.getInstance().getPrefix()+"Plugin not exist!");
+            sender.sendMessage(STPlugin.getInstance().getPrefix()+STPlugin.getInstance().getTranslatedText("pmanager.not.exist"));
             return false;
         }
         if (!plugin.isEnabled()){
-            sender.sendMessage(STPlugin.getInstance().getPrefix()+"Plugin "+plugin.getName()+" already disabled!");
+            sender.sendMessage(STPlugin.getInstance().getPrefix()+"Plugin "+plugin.getName()+STPlugin.getInstance().getTranslatedText("pmanager.already.disabled"));
             return true;
         }
         Bukkit.getPluginManager().disablePlugin(plugin);
-        sender.sendMessage(STPlugin.getInstance().getPrefix()+"Plugin "+plugin.getName()+" successfully disabled!");
+        sender.sendMessage(STPlugin.getInstance().getPrefix()+"Plugin "+plugin.getName()+STPlugin.getInstance().getTranslatedText("pmanager.success.disabled"));
         return true;
     }
 

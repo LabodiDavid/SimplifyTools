@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,6 +31,8 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
     private FileConfiguration config;
 
     public long ServerStartTime;
+
+    private YamlConfiguration langConfig;
     private ServerPasswordData serverPasswordData;
 
     @Override
@@ -186,6 +189,31 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
         return this.serverPasswordData;
     }
 
+    private void initLocalization() throws IOException {
+        File langFolder = new File(getDataFolder(), "lang");
+        if (!langFolder.exists()) {
+            langFolder.mkdirs();
+        }
+
+        String[] languages = {"en", "hu"};
+        for (String l : languages) {
+            File langFile = new File(langFolder, l + ".yml");
+            ConfigUpdater.update(this, "lang/"+l+".yml", langFile, Collections.emptyList());
+        }
+
+        String lang = this.config.getString("language", "en");
+        File langFile = new File(getDataFolder(), "lang/" + lang + ".yml");
+        if (!langFile.exists()) {
+            getLogger().warning("Language file for '" + lang + "' not found. Falling back to English.");
+            langFile = new File(getDataFolder(), "lang/en.yml");
+        }
+        this.langConfig = YamlConfiguration.loadConfiguration(langFile);
+    }
+
+    public String getTranslatedText(String key) {
+        return langConfig.getString(key, "Translation not found: " + key);
+    }
+
     public boolean reload(){
         File configFile = new File(getDataFolder(), "config.yml");
 
@@ -199,6 +227,12 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
         }
         reloadConfig();
         this.config = getConfig();
+        try {
+            this.initLocalization();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         return true;
     }

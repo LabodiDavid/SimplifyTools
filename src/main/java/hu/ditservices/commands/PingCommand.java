@@ -12,7 +12,7 @@ public class PingCommand {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             try {
-                player.sendMessage(plugin.getPrefix() + "Your response time to the server: " + Server.getPlayerPing(player) + " ms");
+                player.sendMessage(plugin.getPrefix() + plugin.getTranslatedText("cmd.ping") + Server.getPlayerPing(player) + " ms");
                 return true;
             } catch (IllegalArgumentException | SecurityException e) {
                 e.printStackTrace();

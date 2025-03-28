@@ -11,6 +11,9 @@
 #  ██████╔╝██║██║░╚═╝░██║██║░░░░░███████╗██║██║░░░░░░░░██║░░░░░░██║░░░╚█████╔╝╚█████╔╝███████╗██████╔╝
 #  ╚═════╝░╚═╝╚═╝░░░░░╚═╝╚═╝░░░░░╚══════╝╚═╝╚═╝░░░░░░░░╚═╝░░░░░░╚═╝░░░░╚════╝░░╚════╝░╚══════╝╚═════╝░
 #
+# Localization options
+# Currently these languages included by default: en, hu. You can add another language in the lang folder.
+language: 'en'
 # Logging options
 # If you enable one of them, a txt file will be created every day automatically with the current date.
 Log:
@@ -61,7 +64,7 @@ Tab:
 CustomMsg:
   enabled: false
   connect: '{PREFIX}{NAME} &aconnected to the server.'
-  disconnect: '{PREFIX}{NAME} leaved the game.'
+  disconnect: '{PREFIX}{NAME} left the game.'
 
 # Auto Save options
 # Saves Worlds/Users data to disk.

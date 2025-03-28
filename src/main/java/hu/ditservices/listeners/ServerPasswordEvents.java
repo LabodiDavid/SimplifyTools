@@ -36,8 +36,8 @@ public class ServerPasswordEvents implements Listener {
                 player.getInventory().clear();
                 player.getInventory().setArmorContents(null);
             }
-            player.sendMessage(ChatColor.RED + "There is server password enabled on this server!");
-            player.sendMessage("Note: This means the same password for all players.");
+            player.sendMessage(ChatColor.RED + plugin.getTranslatedText("serverpassword.enabled"));
+            player.sendMessage(plugin.getTranslatedText("serverpassword.note"));
             BukkitRunnable authReminder = new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -46,7 +46,7 @@ public class ServerPasswordEvents implements Listener {
                         this.cancel();
                         return;
                     }
-                    player.sendMessage(ChatColor.RED + "Please login using /slogin <password>");
+                    player.sendMessage(ChatColor.RED + plugin.getTranslatedText("serverpassword.login"));
                 }
             };
             authReminder.runTaskTimer(plugin, 0L, 100L);

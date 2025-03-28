@@ -1,6 +1,7 @@
 package hu.ditservices.handlers;
 
 import hu.ditservices.STPlugin;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,21 +41,21 @@ public class LoginCommandHandler implements CommandExecutor {
         UUID pUuid = player.getUniqueId();
 
         if (args.length != 1) {
-            player.sendMessage("Usage: /slogin <PASSWORD>");
+            player.sendMessage(plugin.getTranslatedText("cmd.usage.login"));
             return true;
         }
 
         if (plugin.getServerPasswordData().getAuthenticatedPlayers().getOrDefault(pUuid,false)) {
-            player.sendMessage("You are already authenticated.");
+            player.sendMessage(ChatColor.GREEN + plugin.getTranslatedText("serverpassword.already.auth"));
             return true;
         }
 
         if (this.authenticate(player, args[0])) {
-            player.sendMessage("You have been authenticated.");
+            player.sendMessage(ChatColor.GREEN + plugin.getTranslatedText("serverpassword.success.auth"));
             plugin.getServerPasswordData().getInventoryMap().remove(pUuid);
             plugin.getServerPasswordData().getArmorMap().remove(pUuid);
         } else {
-            player.sendMessage("Incorrect password. Try again.");
+            player.sendMessage(ChatColor.RED + plugin.getTranslatedText("serverpassword.incorrect"));
         }
         return true;
     }

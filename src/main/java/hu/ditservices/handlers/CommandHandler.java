@@ -18,7 +18,7 @@ public class CommandHandler implements CommandExecutor {
 
     public CommandHandler(final STPlugin instance) {
         this.plugin = instance;
-        this.noArgMsg = plugin.getPrefix() + ChatColor.DARK_RED + "To list all SimplifyTools commands use the '/help SIMPLIFYTOOLS' command!";
+        this.noArgMsg = plugin.getPrefix() + ChatColor.DARK_RED + plugin.getTranslatedText("list.help");
         this.cd = new Cooldown(plugin);
         this.config = plugin.getConfig();
     }
@@ -44,7 +44,7 @@ public class CommandHandler implements CommandExecutor {
 
                 if (command.getName().equals("st") && (args.length == 0 || args[0].contains("help")))
                 {
-                    sender.sendMessage(plugin.getPrefix() + ChatColor.GREEN+"Version: " + plugin.getDescription().getVersion());
+                    sender.sendMessage(plugin.getPrefix() + ChatColor.GREEN+plugin.getTranslatedText("version.pre.text") + plugin.getDescription().getVersion());
                     sender.sendMessage(this.noArgMsg);
                     return true;
                 }
@@ -58,13 +58,13 @@ public class CommandHandler implements CommandExecutor {
 
                     if(plugin.reload()){
                         sender.sendMessage(plugin.getPrefix()+ChatColor.GREEN+"Successfully reload!" + "\n"
-                        + plugin.getPrefix() + ChatColor.RED + "Notice: Restart your server if the settings didn't applied.");
+                        + plugin.getPrefix() + ChatColor.RED + plugin.getTranslatedText("notice.settings.not.applied"));
                         return true;
                     }
                 }
 
                 if (command.getName().equals("st") && args[0].contains("tps") && sender.hasPermission("st.tps")) {
-                        sender.sendMessage(plugin.getPrefix() + ChatColor.GREEN+"Plugin Calculated TPS: "+TPS.getColor()+String.format("%.2f", TPS.getTPS()));
+                        sender.sendMessage(plugin.getPrefix() + ChatColor.GREEN+plugin.getTranslatedText("plugin.calculated.tps")+TPS.getColor()+String.format("%.2f", TPS.getTPS()));
                         return true;
 
                 }
@@ -72,7 +72,7 @@ public class CommandHandler implements CommandExecutor {
                 if (command.getName().equalsIgnoreCase("st") && args[0].contains("pmanager")) {
                     if (sender.hasPermission("st.pmanager.unload") || sender.hasPermission("st.pmanager.load") || sender.hasPermission("st.pmanager")) {
                         if (args.length==1){
-                            sender.sendMessage(plugin.getPrefix() + ChatColor.DARK_RED+"Invalid arguments!");
+                            sender.sendMessage(plugin.getPrefix() + ChatColor.DARK_RED+plugin.getTranslatedText("invalid.arguments"));
                             return true;
                         }
                         if (config.getBoolean("PluginManager.enabled")) {
@@ -85,7 +85,7 @@ public class CommandHandler implements CommandExecutor {
                                 PluginManagerCommand.UnloadPlugin(sender, args);
                             }
                         } else {
-                            sender.sendMessage(plugin.getPrefix() + ChatColor.DARK_RED + "Plugin manager commands are disabled in the config!");
+                            sender.sendMessage(plugin.getPrefix() + ChatColor.DARK_RED + plugin.getTranslatedText("pmanager.disabled"));
                             return true;
                         }
                     }

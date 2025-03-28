@@ -16,15 +16,17 @@ public class StatCommand {
         long hours = totalSeconds / 3600;
         long minutes = (totalSeconds % 3600) / 60;
         long seconds = totalSeconds % 60;
+        STPlugin plugin = STPlugin.getInstance();
+        plugin.getTranslatedText("");
 
-        player.sendMessage(STPlugin.getInstance().getPrefix() + ChatColor.GREEN + " === Your statistics === ");
-        player.sendMessage(ChatColor.AQUA+"Connects: " + (player.getStatistic(Statistic.LEAVE_GAME)+1));
-        player.sendMessage(ChatColor.AQUA+"Deaths: " + player.getStatistic(Statistic.DEATHS));
-        player.sendMessage(ChatColor.AQUA+"Mob kills: " + player.getStatistic(Statistic.MOB_KILLS));
-        player.sendMessage(ChatColor.AQUA+"Player kills: " + player.getStatistic(Statistic.PLAYER_KILLS));
-        player.sendMessage(ChatColor.AQUA+"Sleep count: " + player.getStatistic(Statistic.SLEEP_IN_BED));
-        player.sendMessage(ChatColor.AQUA+"Enchant count: " + player.getStatistic(Statistic.ITEM_ENCHANTED));
-        player.sendMessage(ChatColor.AQUA + "Total Play Time: " + hours + "h " + minutes + "m " + seconds + "s");
+        player.sendMessage(STPlugin.getInstance().getPrefix() + ChatColor.GREEN + " === "+plugin.getTranslatedText("stats.header")+" === ");
+        player.sendMessage(ChatColor.AQUA+plugin.getTranslatedText("stats.connects") + (player.getStatistic(Statistic.LEAVE_GAME)+1));
+        player.sendMessage(ChatColor.AQUA+plugin.getTranslatedText("stats.deaths") + player.getStatistic(Statistic.DEATHS));
+        player.sendMessage(ChatColor.AQUA+plugin.getTranslatedText("stats.MobKills") + player.getStatistic(Statistic.MOB_KILLS));
+        player.sendMessage(ChatColor.AQUA+plugin.getTranslatedText("stats.PlayerKills") + player.getStatistic(Statistic.PLAYER_KILLS));
+        player.sendMessage(ChatColor.AQUA+plugin.getTranslatedText("stats.sleeps") + player.getStatistic(Statistic.SLEEP_IN_BED));
+        player.sendMessage(ChatColor.AQUA+plugin.getTranslatedText("stats.enchants") + player.getStatistic(Statistic.ITEM_ENCHANTED));
+        player.sendMessage(ChatColor.AQUA + plugin.getTranslatedText("stats.totaltime") + hours + plugin.getTranslatedText("stats.hour") + minutes + plugin.getTranslatedText("stats.minutes") + seconds + plugin.getTranslatedText("stats.seconds"));
         player.sendMessage(ChatColor.GREEN+" =================== ");
         return true;
     }
