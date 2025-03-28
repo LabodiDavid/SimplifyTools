@@ -14,6 +14,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.UUID;
+
 public class ServerPasswordEvents implements Listener {
     private STPlugin plugin;
     private FileConfiguration config;
@@ -79,9 +81,24 @@ public class ServerPasswordEvents implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        if ((!config.getBoolean("ServerPassword.rememberUntilRestart"))
-                || (!plugin.getServerPasswordData().getAuthenticatedPlayers().getOrDefault(event.getPlayer().getUniqueId(),false))) {
-            plugin.getServerPasswordData().getAuthenticatedPlayers().remove(event.getPlayer().getUniqueId());
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+
+        if (plugin.getServerPasswordData().getAuthenticatedPlayers().getOrDefault(uuid, false)) {
+            if (!config.getBoolean("ServerPassword.rememberUntilRestart")) {
+                plugin.getServerPasswordData().getAuthenticatedPlayers().remove(uuid);
+            }
+        } else {
+            if (plugin.getConfig().getBoolean("ServerPassword.preventInventory")) {
+                if (plugin.getServerPasswordData().getInventoryMap().containsKey(uuid)) {
+                    player.getInventory().setContents(plugin.getServerPasswordData().getInventoryMap().get(uuid));
+                    plugin.getServerPasswordData().getInventoryMap().remove(uuid);
+                }
+                if (plugin.getServerPasswordData().getArmorMap().containsKey(uuid)) {
+                    player.getInventory().setArmorContents(plugin.getServerPasswordData().getArmorMap().get(uuid));
+                    plugin.getServerPasswordData().getArmorMap().remove(uuid);
+                }
+            }
         }
     }
 }
