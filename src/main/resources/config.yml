@@ -68,7 +68,7 @@ CustomMsg:
 # Note: You can do a save like this with the /st save-all command.
 # NOTICE: You will need a full MC server restart when you want to apply new settings here.
 Saving:
-  enabled: true
+  enabled: false
   onDisconnect: true # When a player disconnects
   interval: 1800 # Auto saving interval in SECONDS. If this set to zero it means disabled.
   broadcastMsgProgress: '{PREFIX}Auto save in progress..'
