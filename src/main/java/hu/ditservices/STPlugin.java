@@ -198,6 +198,9 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
         String[] languages = {"en", "hu"};
         for (String l : languages) {
             File langFile = new File(langFolder, l + ".yml");
+            if (!langFile.exists()) {
+                saveResource("lang/"+l+".yml", false);
+            }
             ConfigUpdater.update(this, "lang/"+l+".yml", langFile, Collections.emptyList());
         }
 
