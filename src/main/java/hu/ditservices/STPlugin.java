@@ -189,6 +189,24 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
         return this.serverPasswordData;
     }
 
+    private void copyDefaultLang(String filename, File langFolder) {
+        File outFile = new File(langFolder, filename);
+
+        if (!outFile.exists()) {
+            try (InputStream in = getResource(filename);
+                 OutputStream out = new FileOutputStream(outFile)) {
+
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = in.read(buffer)) > 0) {
+                    out.write(buffer, 0, length);
+                }
+            } catch (IOException e) {
+                getLogger().warning(e.getMessage());
+            }
+        }
+    }
+
     private void initLocalization() throws IOException {
         File langFolder = new File(getDataFolder(), "lang");
         if (!langFolder.exists()) {
@@ -199,16 +217,16 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
         for (String l : languages) {
             File langFile = new File(langFolder, l + ".yml");
             if (!langFile.exists()) {
-                saveResource("lang/"+l+".yml", false);
+                copyDefaultLang(l + ".yml", langFolder);
             }
-            ConfigUpdater.update(this, "lang/"+l+".yml", langFile, Collections.emptyList());
+            ConfigUpdater.update(this, l + ".yml", langFile, Collections.emptyList());
         }
 
         String lang = this.config.getString("language", "en");
-        File langFile = new File(getDataFolder(), "lang/" + lang + ".yml");
+        File langFile = new File(getDataFolder(), "lang" + File.separator + lang + ".yml");
         if (!langFile.exists()) {
             getLogger().warning("Language file for '" + lang + "' not found. Falling back to English.");
-            langFile = new File(getDataFolder(), "lang/en.yml");
+            langFile = new File(getDataFolder(), "lang" + File.separator + "en.yml");
         }
         this.langConfig = YamlConfiguration.loadConfiguration(langFile);
     }
