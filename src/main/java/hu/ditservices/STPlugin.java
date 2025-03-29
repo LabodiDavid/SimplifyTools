@@ -126,8 +126,8 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
                 return false;
             }
         } catch (Exception e) {
-            this.log.warning("[SimplifyTools] - INITIALIZATION ERROR: " + e.getMessage());
-            this.log.warning("[SimplifyTools] - Plugin disabled!");
+            this.log.warning(ChatColor.stripColor(this.getPrefix()) + "INITIALIZATION ERROR: " + e.getMessage());
+            this.log.warning(ChatColor.stripColor(this.getPrefix()) + "Plugin disabled!");
             this.setEnabled(false);
             return false;
         }
@@ -202,7 +202,7 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
                     out.write(buffer, 0, length);
                 }
             } catch (IOException e) {
-                getLogger().warning(e.getMessage());
+                this.log.warning(ChatColor.stripColor(this.getPrefix()) + e.getMessage());
             }
         }
     }
@@ -244,14 +244,14 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
             }
             ConfigUpdater.update(this, "config.yml", configFile, Collections.emptyList());
         } catch (IOException e) {
-            e.printStackTrace();
+            this.log.warning(ChatColor.stripColor(this.getPrefix()) + e.getMessage());
         }
         reloadConfig();
         this.config = getConfig();
         try {
             this.initLocalization();
         } catch (IOException e) {
-            e.printStackTrace();
+            this.log.warning(ChatColor.stripColor(this.getPrefix()) + e.getMessage());
         }
 
 

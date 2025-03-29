@@ -1,7 +1,5 @@
 package hu.ditservices.utils;
 
-import java.io.IOException;
-
 public class Math {
     public enum Convert {
         TICKS,SECONDS,MINUTES,HOURS

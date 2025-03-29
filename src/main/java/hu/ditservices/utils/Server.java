@@ -1,6 +1,8 @@
 package hu.ditservices.utils;
 
+import hu.ditservices.STPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import java.lang.Math;
 
@@ -50,7 +52,8 @@ public class Server {
             }
             return player.getPing();
         } catch (Exception e) {
-            e.printStackTrace();
+            STPlugin plugin = STPlugin.getInstance();
+            plugin.getLogger().warning(ChatColor.stripColor(plugin.getPrefix()) + e.getMessage());
             return -1;
         }
     }

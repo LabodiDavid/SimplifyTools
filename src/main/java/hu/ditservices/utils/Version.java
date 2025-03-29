@@ -1,6 +1,8 @@
 package hu.ditservices.utils;
 
+import hu.ditservices.STPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
@@ -91,7 +93,8 @@ public class Version {
                 } catch (NoSuchMethodException e) {
                     // The method doesn't exist in this server version; fall back below.
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    STPlugin plugin = STPlugin.getInstance();
+                    plugin.getLogger().warning(ChatColor.stripColor(plugin.getPrefix()) + e.getMessage());
                 }
 
                 // Fallback: use Bukkit version if no version was obtained or it's empty.

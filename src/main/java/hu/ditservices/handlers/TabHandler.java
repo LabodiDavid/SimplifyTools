@@ -39,9 +39,10 @@ public class TabHandler {
 
         if(this.init()){
             if (headerComponents.isEmpty() && footerComponents.isEmpty()){
-                plugin.getLogger().warning(plugin.getPrefix()+"TAB customization disabled because empty customization config or feature related errors!");
+                plugin.getLogger().warning(ChatColor.stripColor(plugin.getPrefix()) + "TAB customization disabled because empty customization config or feature related errors!");
                 return;
             }
+            plugin.getLogger().info("- TAB customization enabled!");
             this.updateTab();
         }
 
@@ -149,7 +150,7 @@ public class TabHandler {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                plugin.getLogger().warning(ChatColor.stripColor(plugin.getPrefix()) + e.getMessage());
             }
         },0,Math.convert(Math.Convert.SECONDS,Math.Convert.TICKS,this.refreshRate));
 
@@ -184,7 +185,7 @@ public class TabHandler {
             }
 
         } catch (Exception e){
-            e.printStackTrace();
+            plugin.getLogger().warning(ChatColor.stripColor(plugin.getPrefix()) + e.getMessage());
         }
 
     }
