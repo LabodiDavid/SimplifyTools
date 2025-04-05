@@ -28,6 +28,11 @@ public class ServerPasswordEvents implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+
+        if (player.isOp() && config.getBoolean("ServerPassword.exceptOps")) {
+            return;
+        }
+
         if ((!config.getBoolean("ServerPassword.rememberUntilRestart"))
                 || (!plugin.getServerPasswordData().getAuthenticatedPlayers().getOrDefault(player.getUniqueId(),false))) {
             plugin.getServerPasswordData().getAuthenticatedPlayers().put(player.getUniqueId(),false);
@@ -83,6 +88,10 @@ public class ServerPasswordEvents implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
+
+        if (player.isOp() && config.getBoolean("ServerPassword.exceptOps")) {
+            return;
+        }
 
         if (plugin.getServerPasswordData().getAuthenticatedPlayers().getOrDefault(uuid, false)) {
             if (!config.getBoolean("ServerPassword.rememberUntilRestart")) {
