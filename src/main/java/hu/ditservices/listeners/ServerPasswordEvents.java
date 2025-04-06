@@ -25,11 +25,16 @@ public class ServerPasswordEvents implements Listener {
         this.config = plugin.getConfig();
     }
 
+    private boolean skipIfOpPlayer(Player player)
+    {
+        return player.isOp() && config.getBoolean("ServerPassword.exceptOps");
+    }
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        if (player.isOp() && config.getBoolean("ServerPassword.exceptOps")) {
+        if (skipIfOpPlayer(player)) {
             return;
         }
 
@@ -62,6 +67,9 @@ public class ServerPasswordEvents implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
+        if (skipIfOpPlayer(event.getPlayer())) {
+            return;
+        }
         if ((!plugin.getServerPasswordData().getAuthenticatedPlayers().getOrDefault(event.getPlayer().getUniqueId(),false))
         && config.getBoolean("ServerPassword.preventMove")) {
             event.setCancelled(true);
@@ -70,6 +78,9 @@ public class ServerPasswordEvents implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
+        if (skipIfOpPlayer(event.getPlayer())) {
+            return;
+        }
         if ((!plugin.getServerPasswordData().getAuthenticatedPlayers().getOrDefault(event.getPlayer().getUniqueId(),false))
         && config.getBoolean("ServerPassword.preventBuild")) {
             event.setCancelled(true);
@@ -78,6 +89,9 @@ public class ServerPasswordEvents implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
+        if (skipIfOpPlayer(event.getPlayer())) {
+            return;
+        }
         if ((!plugin.getServerPasswordData().getAuthenticatedPlayers().getOrDefault(event.getPlayer().getUniqueId(),false))
                 && config.getBoolean("ServerPassword.preventBuild")) {
             event.setCancelled(true);
@@ -89,7 +103,7 @@ public class ServerPasswordEvents implements Listener {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
 
-        if (player.isOp() && config.getBoolean("ServerPassword.exceptOps")) {
+        if (skipIfOpPlayer(player)) {
             return;
         }
 
