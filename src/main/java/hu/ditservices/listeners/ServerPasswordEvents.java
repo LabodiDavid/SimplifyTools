@@ -27,7 +27,7 @@ public class ServerPasswordEvents implements Listener {
 
     private boolean skipIfOpPlayer(Player player)
     {
-        return player.isOp() && config.getBoolean("ServerPassword.exceptOps");
+        return (player.isOp() && config.getBoolean("ServerPassword.exceptOps")) || player.hasPermission("st.slogin.skip");
     }
 
     @EventHandler
