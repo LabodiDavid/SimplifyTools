@@ -108,10 +108,11 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
     private boolean initPlugin() {
         try {
             this.ServerStartTime = ManagementFactory.getRuntimeMXBean().getStartTime();
-            if (Version.ServerVersion.isCurrentLower(Version.ServerVersion.v1_12_R1) ||
-                    Version.ServerVersion.isCurrentHigher(Version.ServerVersion.v1_21_5_R1))
-            {
-                throw new Exception("The server version is not supported! Update to a version between 1.12 - 1.21.5 to run this plugin.");
+            if (Version.ServerVersion.isCurrentLower(Version.ServerVersion.v1_12_R1)) {
+                throw new Exception("The server version is not supported! Update to to atleast 1.12 version to use this plugin!");
+            }
+            if (Version.ServerVersion.isCurrentHigher(Version.ServerVersion.v1_21_5_R1)) {
+                this.log.warning(ChatColor.stripColor(this.getPrefix()) + "You are running a server version which is not tested with this plugin, errors can be occur!");
             }
 
             if (this.reload()) {
