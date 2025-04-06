@@ -91,12 +91,28 @@ ServerPassword:
   preventMove: true
   preventBuild: true
 
+# Dropped items clearing options
+ClearDropItems:
+  enabled: false
+  interval: 300  # Interval in seconds between each clear cycle
+  broadcastMsg: true # Broadcasts alerts before clearing 1 minutes and 10 seconds before and when cleared. Set this to 'false' to make cleaning silently.
+  # Dropped items that should always be kept (never cleared)
+  except:
+    - DIAMOND
+    - GOLD_INGOT
+   # - COAL
+   # - IRON_INGOT
+   # - BREAD
+  # Worlds to skip (dropped items in these worlds won't be cleared)
+  skipWorlds:
+      - world_nether
+      - world_the_end
 
 # Cooldown options (only applicable for this plugin!)
 Cooldown:
   enabled: true
   # The time must be passed between using this plugin commands.
-  seconds: 2 #The command cooldown in seconds
+  seconds: 1 #The command cooldown in seconds
   Msg: '{PREFIX} Please wait {SECONDS} seconds!' # The message when the user spamming a command
 #
 # Plugin Manager - Enable/Disable plugins without server restart

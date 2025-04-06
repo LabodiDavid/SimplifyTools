@@ -78,6 +78,11 @@ public final class STPlugin extends JavaPlugin implements CommandExecutor, Liste
     private void scheduleTasks() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new TPS(), 0, 1);
 
+        if (this.config.getBoolean("ClearDropItems.enabled")) {
+            new ClearDropItemsTask(this).runTaskTimer(this, 20L, 20L);
+            this.log.info(ChatColor.stripColor(this.getPrefix()) + "Clear dropped items enabled!");
+        }
+
         if (this.config.getBoolean("Saving.enabled") && this.config.getInt("Saving.interval") > 0) {
             long intervalTicks = Math.convert(Math.Convert.SECONDS, Math.Convert.TICKS, instance.config.getInt("Saving.interval"));
             Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new SaveHandler(), 0L, intervalTicks);
