@@ -1,5 +1,13 @@
 # SimplifyTools - Changelog
-
+- **1.2.4**
+  - Added *Server password feature*
+  - Added *Clearing dropped items feature*
+  - Implemented customizable translation
+  - Added total play time to stats command
+  - Tab completer optimalizations
+  - Minor refactors/optimalizations
+  - Prepared support for 1.21.5 (Not tested yet)
+  - From now running newer untested server versions is allowed
 - **1.2.3**
   - Added support for version up to 1.21.4
   - The plugin now depends on, <b>requires ProtocolLib</b> (https://github.com/dmulloy2/ProtocolLib/)
